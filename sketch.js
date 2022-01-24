@@ -1,5 +1,3 @@
-/// <reference path="/Users/henningbrode/Library/Application Support/JetBrains/IntelliJIdea2021.3/javascript/extLibs/http_cdnjs.cloudflare.com_ajax_libs_p5.js_1.4.0_p5.js" />
-
 let requestedData;
 
 let dataArray = [];
@@ -35,6 +33,9 @@ function setup() {
   dataMax = max(dataArray);
 }
 
+
+
+
 // Called over and over to refresh your visualisation.
 // See https://p5js.org/reference/#/p5/draw
 function draw() {
@@ -49,6 +50,6 @@ function draw() {
     } else {
       fill(255);
     }
-    ellipse(x, 400, diameter);
+    circle(x, 400, diameter);
   }
 }
