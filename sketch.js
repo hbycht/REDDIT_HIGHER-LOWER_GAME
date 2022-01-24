@@ -33,6 +33,9 @@ function setup() {
   dataMax = max(dataArray);
 }
 
+
+
+
 // Called over and over to refresh your visualisation.
 // See https://p5js.org/reference/#/p5/draw
 function draw() {
