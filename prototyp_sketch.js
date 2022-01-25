@@ -43,7 +43,7 @@ function setup() {
     textAlign(CENTER);
 
     // Log fetched data
-    print("API data: ");
+    // print("API data: ");
     // print(JSON.stringify(requestedData.data.children, undefined, 2));
     // console.log(requestedData.data.children);
 
