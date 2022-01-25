@@ -9,11 +9,11 @@ let redditPosts = [];
 let pointMin = 5;
 let pointMax = 100;
 
-let speakerVoice = 5;
+let speakerVoice = 7;
 let speaker = new p5.Speech(speakerVoice); // speech synthesis object
 speaker.onEnd = function(e) {
     isSpeaking = false;
-    speakerVoice = speakerVoice > 60 ? 0 : speakerVoice + 1;
+    speakerVoice = floor(random(60));
     speaker.setVoice(speakerVoice);
     console.log(speakerVoice);
 }
@@ -30,7 +30,7 @@ function speakKeyword(keyword) {
 // See https://p5js.org/reference/#/p5/preload
 function preload() {
     // Call RKI Covid-19 API
-    requestedData = loadJSON('https://www.reddit.com/r/AskReddit/hot/.json');
+    // requestedData = loadJSON('https://www.reddit.com/r/AskReddit/hot/.json');
 
     console.log(speaker.voices.length);
 }
@@ -48,12 +48,20 @@ function setup() {
     // console.log(requestedData.data.children);
 
     // Squeezing post data into an array (e.g. "ups" for upvotes)
-    for (let i = 0; i < requestedData.data.children.length; i++) {
+    // for (let i = 0; i < requestedData.data.children.length; i++) {
+    //     redditPosts.push({
+    //         "ups": requestedData.data.children[i].data.ups,
+    //         "title": requestedData.data.children[i].data.title,
+    //     });
+    // }
+
+    for (let i = 0; i < 7; i++) {
         redditPosts.push({
-            "ups": requestedData.data.children[i].data.ups,
-            "title": requestedData.data.children[i].data.title,
+            "ups": i * 5025,
+            "title": "This could post number " + (i+1) + " of a lot of reddits.",
         });
     }
+
     console.log(redditPosts);
     
 
@@ -108,7 +116,8 @@ function draw() {
             text(redditPosts[i].title, 50, y + 100, width - 100, height * 0.2);
 
             if(!isSpeaking && mouseIsPressed) {
-                let keyword = redditPosts.title;
+                console.log(redditPosts[i].title);
+                let keyword = redditPosts[i].title;
                 speakKeyword(keyword);
             }
         }
