@@ -27,5 +27,5 @@ function initSubmitGUI() {
     subredditSubmissionButton.position(subredditSubmissionInput.x + subredditSubmissionInput.width, 65);
 
     // Event-listener for button pressed
-    subredditSubmissionButton.onSubmit(addSubreddit);
+    subredditSubmissionButton.mousePressed(addSubreddit);
 }
