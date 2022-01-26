@@ -8,6 +8,7 @@ let buttonAnswer1;
 let buttonAnswer2;
 
 let subreddits = [];
+let subredditsImg = [];
 let dataMin = 1;
 let dataMax;
 
@@ -30,6 +31,9 @@ function preload(){
     loadSubreddit("AskReddit");
     loadSubreddit("AskScience");
     loadSubreddit("AskWomen");
+    loadSubreddit("memes");
+    loadSubreddit("ich_iel");
+    loadSubreddit("me_irl");
 
 }
 
@@ -42,6 +46,29 @@ function setup(){
     midX = width / 2;
     midY = height / 2;
 
+
+    //Image Speicher
+
+   /* for (let i = 0; i < subreddits.length; i++) {
+        for (let j = 0; i < subreddits[i].posts.length; j++){
+            if( subreddits[i].posts.post_hint == 'image'){
+
+                subredditsImg[index].posts.push({
+
+                    "title": subreddits[j].posts.title,
+                    "url": subreddits[j].posts.url,
+                    "ups": subreddits[j].posts.ups,
+                    "numComments": subreddits[j].posts.num_comments,
+                    "comments": [],
+
+
+                });
+            }
+        }
+
+    }*/
+
+    // Image Storrage
 
 
     /*   for (let i = 0; i < redditJson.data.children.length; i++) {
@@ -109,6 +136,7 @@ function draw(){
 
 
 
+
     // fill(50, 50, 50, alphaWrong);
     // text("This is wrong", midX, midY - 50);
 
@@ -159,5 +187,8 @@ function onclicklower() {
 
 }
 function testebutton(){
-    console.log(subreddits[subreddits.length - 1])
+    console.log(subredditsImg)
+    console.log(subreddits)
+    console.log(subreddits.length)
+
 }
