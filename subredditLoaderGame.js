@@ -1,7 +1,7 @@
 /// <reference path="../TSDef/p5.global-mode.d.ts" />
 
 function loadSubreddit(subreddit){
-    
+
     // Duplicate check all names
     let tempNames = [];
     subreddits.forEach(sub => {
@@ -13,7 +13,7 @@ function loadSubreddit(subreddit){
         loadJSON('https://www.reddit.com/r/'+ subreddit +'/top/.json?t=all', formatData, logError);
 }
 
-// Pull out & format the important data 
+// Pull out & format the important data
 function formatData(d){
 
     if(d.data.children.length > 0) {
@@ -49,7 +49,7 @@ function formatData(d){
                 tempData.push(post.ups);
             });
         });
-        
+
         dataMax = max(tempData);
 
         console.log("New subreddit loaded.");

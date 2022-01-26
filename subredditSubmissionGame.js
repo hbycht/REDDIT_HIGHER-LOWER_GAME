@@ -9,7 +9,7 @@ function addSubreddit() {
     console.log("input: " + n);
     loadSubreddit(n);
     document.getElementById("subredditSubmission").value = "";
-    
+
 }
 
 // Create and display all GUI elements
@@ -18,7 +18,7 @@ function initSubmitGUI() {
     subredditSubmissionText = createElement('h2', 'Add your own subreddit :)');
     subredditSubmissionInput = createInput();
     subredditSubmissionButton = createButton('add');
-    
+
     // Display
     subredditSubmissionText.position(20, 5);
     subredditSubmissionText.style("color", "#ffe7b3");
