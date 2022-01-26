@@ -1,14 +1,16 @@
+body {
+    background: linear-gradient(0.25turn, hsl(221, 96%, 21%), hsl(41, 92%, 76%), hsl(180, 63%, 31%));
+}
+
 main {
-    background-color: hsl(197, 100%, 6%);
     
     width: max-content;
     height: max-content;
     
-    margin: 0;
-    padding: 10%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translateY(-50%) translateX(-50%);
-    transform: translateY(-50%) translateX(-50%);
+
+    margin: 7% 10% 0% 10%;
+    padding: 0;
+    position: relative;
+    top: 0%;
+    left: 0%;
 }
