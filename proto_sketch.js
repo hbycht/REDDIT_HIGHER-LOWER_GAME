@@ -1,6 +1,5 @@
 /// <reference path="./TSDef/p5.global-mode.d.ts" />
 
-let requestedData = [];
 let dataMin = 1;
 let dataMax;
 let subreddits = [];
@@ -10,6 +9,7 @@ let addSubredditInput;
 let pointMin = 5;
 let pointMax = 100;
 
+// Function fires if submit-button is pressed
 function addSubreddit() {
     let n = document.getElementById("addSubreddit").value;
     console.log("input: " + n);
@@ -38,24 +38,21 @@ function speakKeyword(keyword) {
 function preload() {
     //* No need anymore
     //* Load all subreddits in setup with loadSubreddit(subreddit)
-
-    // Preload all reddit .json (You can add even more; maybe it gets a bit overloaded)
-    // requestedData.push(loadJSON("https://www.reddit.com/r/AskReddit/top/.json?t=all"));
-    // requestedData.push(loadJSON("https://www.reddit.com/r/askscience/top/.json?t=all"));
-    // requestedData.push(loadJSON("https://www.reddit.com/r/askwomen/top/.json?t=all"));
-    // requestedData.push(loadJSON("https://www.reddit.com/r/Showerthoughts/top/.json?t=all"));
 }
 
 //*** SETUP */
 function setup() {
     
     // Load all reddit .json (You can add even more; maybe it gets a bit overloaded)
-    loadSubreddit("askreddit");
+    loadSubreddit("Showerthoughts");
+    // loadSubreddit("askreddit");
+    // loadSubreddit("askscience");
+    // loadSubreddit("askwomen");
 
     createCanvas(windowWidth * 0.8, windowHeight * 0.8);
 
     // GUI to add subreddits
-    let addSubredditText = createElement('h2', 'Want to add your own subreddit?');
+    let addSubredditText = createElement('h2', 'Add your own subreddit :)');
     addSubredditText.position(20, 5);
     addSubredditText.style("color", "#fff");
 
@@ -70,34 +67,9 @@ function setup() {
     // Some general settings
     colorMode(HSB, 360, 100, 100, 100);
     textAlign(CENTER, CENTER);
-
-    // Log fetched data
-    print("API data: ");
-
-    for(let r = 0; r < requestedData.length; r++) {
-        // Add another subreddit-placeholder to list
-        subreddits.push({
-            "name": "",
-            "numFollows": 0,
-            "posts": [],
-        });
-
-        // Squeezing data out of subreddit
-        subreddits[r].name = requestedData[r].data.children[0].data.subreddit;
-        subreddits[r].numFollows = requestedData[r].data.children[0].data.subreddit_subscribers;
-
-        // Push important post data into an array
-        for (let i = 0; i < requestedData[r].data.children.length; i++) {
-            subreddits[r].posts.push({
-                "title": requestedData[r].data.children[i].data.title,
-                "url": requestedData[r].data.children[i].data.url,
-                "ups": requestedData[r].data.children[i].data.ups,
-                "numComments": requestedData[r].data.children[i].data.num_comments,
-            });
-        }
-    }
     
-    // Log of subreddits
+    // Log all subreddits
+    print("API data: ");
     console.log(subreddits);
 
     midX = width / 2;

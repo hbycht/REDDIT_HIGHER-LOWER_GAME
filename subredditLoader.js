@@ -41,6 +41,14 @@ function formatData(d){
 
 
 function loadSubreddit(subreddit){
-    // Call Reddit .json
-    loadJSON('https://www.reddit.com/r/'+ subreddit +'/top/.json?t=all', formatData);
+    
+    // Duplicate check all names
+    let tempNames = [];
+    subreddits.forEach(sub => {
+        tempNames.push(sub.name.toLowerCase());
+    });
+
+    if(!tempNames.includes(subreddit.toLowerCase()))
+        // Call Reddit .json
+        loadJSON('https://www.reddit.com/r/'+ subreddit +'/top/.json?t=all', formatData);
 }
