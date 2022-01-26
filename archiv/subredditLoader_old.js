@@ -1,4 +1,4 @@
-/// <reference path="./TSDef/p5.global-mode.d.ts" />
+/// <reference path="../TSDef/p5.global-mode.d.ts" />
 
 let requestedData;
 let isLoading = false;
