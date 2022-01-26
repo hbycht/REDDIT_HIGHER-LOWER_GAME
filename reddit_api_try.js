@@ -14,7 +14,7 @@ let dataMax;
 let midX;
 let midY;
 
-let randomSubrettid;
+let randomSubreddit = 0;
 let randomPost;
 let startReddit;
 let startPost;
@@ -44,12 +44,12 @@ function setup(){
 
 
 
- /*   for (let i = 0; i < redditJson.data.children.length; i++) {
-        redditData.push({
-            "ups": redditJson.data.children[i].data.ups,
-            "title": redditJson.data.children[i].data.title,
-        });
-    }*/
+    /*   for (let i = 0; i < redditJson.data.children.length; i++) {
+           redditData.push({
+               "ups": redditJson.data.children[i].data.ups,
+               "title": redditJson.data.children[i].data.title,
+           });
+       }*/
 
     //console.log(redditData);
 
@@ -62,11 +62,11 @@ function setup(){
     buttonAnswer3 = createButton('test');
     buttonAnswer3.position(midX - 250, midY + 100);
 
-    randomSubreddit = round(random(0, 4));
-    console.log(randomSubrettid);
-    randomPost = random(0, subreddits[randomSubrettid].posts.length);
+    randomSubreddit = int(random(0, subreddits.length));
+    console.log(randomSubreddit)
+    randomPost = int(random(0, subreddits[randomSubreddit].posts.length));
 
-    startReddit = randomSubrettid;
+    startReddit = randomSubreddit;
     startPost = randomPost;
 }
 
@@ -85,16 +85,21 @@ function draw(){
 
     fill(50, 50, 50, 100);
     text(subreddits[startReddit].posts[startPost].title, midX, midY);
+    //text(subreddits[startReddit].title, midX + 10, midY);
 
     fill(50, 50, 50, alphaUps);
     text(subreddits[startReddit].posts[startPost].ups, midX, midY + 10);
+    text(subreddits[startReddit].name, midX, midY - 20);
 
     fill(50, 50, 50, 100)
-    text(subreddits[randomSubrettid].posts[randomPost].title, midX, midY + 50);
+    text(subreddits[randomSubreddit].posts[randomPost].title, midX, midY + 50);
+    //text(subreddits[randomSubreddit].title, midX +10, midY + 50);
 
     fill(50, 50, 50, 0);
-    text(subreddits[randomSubrettid].posts[randomPost].ups, midX, midY + 60);
-    console.log(redditData[index +1].ups);
+    text(subreddits[randomSubreddit].posts[randomPost].ups, midX, midY + 60);
+    fill(50, 50, 50, 100);
+    text(subreddits[randomSubreddit].name, midX, midY + 70);
+
 
 
     buttonAnswer1.mousePressed(onclickhigher)
@@ -111,45 +116,45 @@ function draw(){
 }
 
 function onclickhigher() {
-    if(subreddits[startReddit].posts[startPost].ups >= subreddits[randomSubrettid].posts[randomPost].ups){
+    if(subreddits[startReddit].posts[startPost].ups >= subreddits[randomSubreddit].posts[randomPost].ups){
         //"This is Right"
-        richtigoderfalsch = "Das war Richtig der post hat " + (subreddits[startReddit].posts[startPost].ups - subreddits[randomSubrettid].posts[randomPost].ups) + " upvotes mehr "
+        richtigoderfalsch = "Das war Richtig der post hat " + (subreddits[startReddit].posts[startPost].ups - subreddits[randomSubreddit].posts[randomPost].ups) + " upvotes mehr "
         score++
-        startReddit = randomSubrettid;
+        startReddit = randomSubreddit;
         startPost = randomPost;
-        randomSubreddit = random(0, subreddits.length);
-        randomPost = random(0, subreddits[randomSubreddit].posts.length);
+        randomSubreddit = int(random(0, subreddits.length));
+        randomPost = int(random(0, subreddits[randomSubreddit].posts.length));
 
     }else{
-        richtigoderfalsch = "Das war Falsch der post hat " + (subreddits[randomSubrettid].posts[randomPost].ups - subreddits[startReddit].posts[startPost].ups) + " upvotes weniger "
+        richtigoderfalsch = "Das war Falsch der post hat " + (subreddits[randomSubreddit].posts[randomPost].ups - subreddits[startReddit].posts[startPost].ups) + " upvotes weniger "
         //"This is wrong"
         score = 0
-        startReddit = randomSubrettid;
+        startReddit = randomSubreddit;
         startPost = randomPost;
-        randomSubreddit = random(0, subreddits.length);
-        randomPost = random(0, subreddits[randomSubreddit].posts.length);
+        randomSubreddit = int(random(0, subreddits.length));
+        randomPost = int(random(0, subreddits[randomSubreddit].posts.length));
     }
 
 }
 
 function onclicklower() {
-    if(subreddits[randomSubrettid].posts[randomPost].ups >= subreddits[startReddit].posts[startPost].ups){
-        richtigoderfalsch = "Das war Richtig der post hat " + (subreddits[randomSubrettid].posts[randomPost].ups - subreddits[startReddit].posts[startPost].ups) + " upvotes mehr "
+    if(subreddits[randomSubreddit].posts[randomPost].ups >= subreddits[startReddit].posts[startPost].ups){
+        richtigoderfalsch = "Das war Richtig der post hat " + (subreddits[randomSubreddit].posts[randomPost].ups - subreddits[startReddit].posts[startPost].ups) + " upvotes mehr "
         //"This is Right"
         score++
-        startReddit = randomSubrettid;
+        startReddit = randomSubreddit;
         startPost = randomPost;
-        randomSubreddit = random(0, subreddits.length);
-        randomPost = random(0, subreddits[randomSubreddit].posts.length);
+        randomSubreddit = int(random(0, subreddits.length));
+        randomPost = int(random(0, subreddits[randomSubreddit].posts.length));
 
     }else{
         //"This is wrong"
-        richtigoderfalsch = "Das war Falsch der post hat " + (subreddits[startReddit].posts[startPost].ups - subreddits[randomSubrettid].posts[randomPost].ups) + " upvotes weniger "
+        richtigoderfalsch = "Das war Falsch der post hat " + (subreddits[startReddit].posts[startPost].ups - subreddits[randomSubreddit].posts[randomPost].ups) + " upvotes weniger "
         score = 0
-        startReddit = randomSubrettid;
+        startReddit = randomSubreddit;
         startPost = randomPost;
-        randomSubreddit = random(0, subreddits.length);
-        randomPost = random(0, subreddits[randomSubreddit].posts.length);
+        randomSubreddit = int(random(0, subreddits.length));
+        randomPost = int(random(0, subreddits[randomSubreddit].posts.length));
     }
 
 }
