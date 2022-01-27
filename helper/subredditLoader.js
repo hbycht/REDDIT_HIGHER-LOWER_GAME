@@ -3,8 +3,20 @@
 let dataMin = 1;
 let dataMax;
 
+// list of subreddit names
+let listOfSubredditNames = [
+    "askReddit",
+    "AMA",
+    "askWomen",
+    "askScience",
+]
+
 // list of all subreddits
 let subreddits = [];
+
+// temp game subreddits
+let actualSubreddit = {};
+let nextSubreddit = {};
 
 // Current index of subreddit in list
 let currentSubredditIndex;

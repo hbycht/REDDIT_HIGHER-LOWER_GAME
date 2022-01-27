@@ -1,7 +1,21 @@
 ///path="../TSDef/p5.global-mode.d.ts";
 
-let redditJson;
-let redditData = [];
+// subreddit temps
+// e.g.
+// subreddits = [
+//     "actual",
+//     "next",
+// ]
+//
+// listOfSubredditNames = [
+//     "aksReddit",
+//     "AMA",
+//     "askWomen",
+//     "askScience",
+// ]
+
+
+
 let alphaUps = 100;
 let alphaWrong = 0;
 let buttonAnswer1;
@@ -20,56 +34,88 @@ let index = 0;
 let score = 0;
 let richtigoderfalsch = "Viel Glück beim Raten";
 
+// load next subreddit into temp
+function loadNextRound() {
+    // load random subreddit out of subreddits[] into tempSubreddit
+    // load next subreddit into subreddits[] (loadSubreddit in background)
+    actualSubreddit = nextSubreddit;
+    nextSubreddit = subreddits[subreddits.length - 1];
+    loadSubreddit(random(listOfSubredditNames));
+    subreddits.shift();
+
+}
+
+// to show the post (index for left or right)
+function showPost(index) {
+    // zeichne rechteck usw.
+    // schreibe post text oder bild...
+
+    // show post 1 of actual subreddit
+    // actualSubreddit.posts[1].ups
+}
+
+// handler onClick (index for left or right)
+function selectPost(index) {
+    // change gameState
+}
+
+// show gameScore
+function showScore() {
+
+}
+
 function setupGame(){
 
-    buttonAnswer1 = createButton('Answer1');
-    buttonAnswer2 = createButton('Answer2');
+    loadNextRound();
 
-    buttonAnswer1.position(midX - 250, midY);
-    buttonAnswer2.position(midX - 250, midY + 50);
-
-    buttonAnswer3 = createButton('test');
-    buttonAnswer3.position(midX - 250, midY + 100);
-
-    randomSubreddit = int(random(0, subreddits.length));
-    randomPost = int(random(0, subreddits[randomSubreddit].posts.length));
-
-    startReddit = int(randomSubreddit / 2);
-    startPost = int(randomPost / 2);
+    // buttonAnswer1 = createButton('Answer1');
+    // buttonAnswer2 = createButton('Answer2');
+    //
+    // buttonAnswer1.position(midX - 250, midY);
+    // buttonAnswer2.position(midX - 250, midY + 50);
+    //
+    // buttonAnswer3 = createButton('test');
+    // buttonAnswer3.position(midX - 250, midY + 100);
+    //
+    // randomSubreddit = int(random(0, subreddits.length));
+    // randomPost = int(random(0, subreddits[randomSubreddit].posts.length));
+    //
+    // startReddit = int(randomSubreddit / 2);
+    // startPost = int(randomPost / 2);
 }
 
 function drawGame(){
 
-    fill(100, 100, 100, 100);
-    text("Which Post has more likes?", midX, midY - 100);
-//score
-    fill(100, 100, 100, 100);
-    text("Score: " + score, midX + 250, midY - 100);
-
-//Richtig oder Falsch
-    fill(100, 100, 100, 100);
-    text(richtigoderfalsch, midX, midY + 300);
-
-    fill(50, 50, 50, 100);
-    text(subreddits[startReddit].posts[startPost].title, midX, midY);
-    //text(subreddits[startReddit].title, midX + 10, midY);
-
-    fill(50, 50, 50, alphaUps);
-    text(subreddits[startReddit].posts[startPost].ups, midX, midY + 10);
-    text(subreddits[startReddit].name, midX, midY - 20);
-
-    fill(50, 50, 50, 100)
-    text(subreddits[randomSubreddit].posts[randomPost].title, midX, midY + 50);
-    //text(subreddits[randomSubreddit].title, midX +10, midY + 50);
-
-    fill(50, 50, 50, 0);
-    text(subreddits[randomSubreddit].posts[randomPost].ups, midX, midY + 60);
-    fill(50, 50, 50, 100);
-    text(subreddits[randomSubreddit].name, midX, midY + 70);
-
-    buttonAnswer1.mousePressed(onclickhigher)
-    buttonAnswer2.mousePressed(onclicklower)
-    //buttonAnswer3.mousePressed(testebutton)
+//     fill(100, 100, 100, 100);
+//     text("Which Post has more likes?", midX, midY - 100);
+// //score
+//     fill(100, 100, 100, 100);
+//     text("Score: " + score, midX + 250, midY - 100);
+//
+// //Richtig oder Falsch
+//     fill(100, 100, 100, 100);
+//     text(richtigoderfalsch, midX, midY + 300);
+//
+//     fill(50, 50, 50, 100);
+//     text(subreddits[startReddit].posts[startPost].title, midX, midY);
+//     //text(subreddits[startReddit].title, midX + 10, midY);
+//
+//     fill(50, 50, 50, alphaUps);
+//     text(subreddits[startReddit].posts[startPost].ups, midX, midY + 10);
+//     text(subreddits[startReddit].name, midX, midY - 20);
+//
+//     fill(50, 50, 50, 100)
+//     text(subreddits[randomSubreddit].posts[randomPost].title, midX, midY + 50);
+//     //text(subreddits[randomSubreddit].title, midX +10, midY + 50);
+//
+//     fill(50, 50, 50, 0);
+//     text(subreddits[randomSubreddit].posts[randomPost].ups, midX, midY + 60);
+//     fill(50, 50, 50, 100);
+//     text(subreddits[randomSubreddit].name, midX, midY + 70);
+//
+//     buttonAnswer1.mousePressed(onclickhigher)
+//     buttonAnswer2.mousePressed(onclicklower)
+//     //buttonAnswer3.mousePressed(testebutton)
 
 }
 
@@ -116,6 +162,7 @@ function onclicklower() {
     }
 
 }
+
 /*
 function testebutton(){
     console.log(subredditsImg)

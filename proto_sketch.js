@@ -8,13 +8,6 @@ function preload() {
 
     // ** Load all reddit .json (You can add even more; maybe it gets a bit overloaded) **//
     loadSubreddit("Showerthoughts");
-    loadSubreddit("memes");
-    loadSubreddit("AskReddit");
-    loadSubreddit("AskScience");
-    loadSubreddit("AskWomen");
-    loadSubreddit("ama");
-    loadSubreddit("ich_iel");
-    loadSubreddit("me_irl");
 
 }
 
