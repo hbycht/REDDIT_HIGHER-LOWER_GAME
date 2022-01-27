@@ -80,8 +80,68 @@ function selectPost(index) {
     // change gameState
 }
 
-// show gameScore
-function showScore() {
+// show gameResults
+function showResults() {
+    let recxmid = midX - width / 2.5;
+    let recymid = midY - 200;
+    let recxmid2 = midX + width / 5;
+    console.log(width);
+
+    if(actualPostleft.ups < actualPostright.ups){
+        fill(120, 100, 50);
+        rect(recxmid, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        text(actualPostleft.ups, recxmid, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        rect(recxmid2, recymid, 300, 200);
+
+        fill(150, 100, 50);
+        text(actualPostright.ups, recxmid2, recymid, 300, 200);
+
+    }else if(actualPostleft.ups > actualPostright.ups){
+        fill(0, 100, 50);
+        rect(recxmid, recymid, 300, 200);
+
+        fill(150, 100, 50);
+        text(actualPostleft.ups, recxmid, recymid, 300, 200);
+
+        fill(120, 100, 50);
+        rect(recxmid2, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        text(actualPostright.ups, recxmid2, recymid, 300, 200);
+
+    }else{
+        fill(120, 100, 50);
+        rect(recxmid, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        text(actualPostleft.ups, recxmid, recymid, 300, 200);
+
+        fill(120, 100, 50);
+        rect(recxmid2, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        text(actualPostright.ups, recxmid2, recymid, 300, 200);
+    }
+
+
+}
+
+function manageGameState(timer){
+
+    if(timer < 1){
+        showPosts();
+
+    }else if(timer === 1){
+        showResults();
+
+    }
+}
+
+function showScore(){
 
 }
 
