@@ -43,10 +43,15 @@ function loadNextRound() {
     // load next subreddit into subreddits[] (loadSubreddit in background)
     actualSubreddit = nextSubreddit;
     nextSubreddit = subreddits[subreddits.length - 1];
-    loadSubreddit(listOfSubredditNames[int(random(listOfSubredditNames))]);
-    actualPostleft = actualSubreddit.posts[int(random(actualSubreddit.posts))]
-    actualPostright = actualSubreddit.posts[int(random(actualSubreddit.posts))]
-    subreddits.shift(); // warum subreddits?
+
+    loadSubreddit(random(listOfSubredditNames));
+
+    console.log("Achtual Subreddit: " + actualSubreddit.name);
+
+    actualPostleft = random(actualSubreddit.posts);
+    actualPostright = random(actualSubreddit.posts);
+
+    subreddits.shift();
 
 }
 
@@ -59,20 +64,17 @@ function showPost(index) {
     // zeichne rechteck usw.
     // schreibe post text oder bild...
 
-console.log(actualPost);
-
-
     if(index == 0){
 
         rect(recxmid,recymid,300,400);
         textAlign(CENTER);
-        text(actualPost.title,recxmid -300,recymid -100 )
+        text(actualPostleft.title,recxmid -300,recymid -100 )
     }else{
         let recxmid2 = midX + 300;
 
         rect(recxmid2,recymid,300,400)
         textAlign(CENTER);
-        text(actualPost.title,recxmid2 - 150,recymid -100)
+        text(actualPostright.title,recxmid2 - 150,recymid -100)
     }
 
 
