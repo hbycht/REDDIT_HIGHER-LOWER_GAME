@@ -8,6 +8,7 @@ let buttonAnswer1;
 let buttonAnswer2;
 
 let subreddits = [];
+let subredditsImg = [];
 let dataMin = 1;
 let dataMax;
 
@@ -26,10 +27,32 @@ let richtigoderfalsch = "Viel Glück beim Raten";
 function preload(){
     redditJson = loadJSON('https://www.reddit.com/r/AMA/.json');
 
-    loadSubreddit("AMA");
+    loadSubreddit("memes");
     loadSubreddit("AskReddit");
     loadSubreddit("AskScience");
     loadSubreddit("AskWomen");
+    loadSubreddit("ama");
+    loadSubreddit("ich_iel");
+    loadSubreddit("me_irl");
+
+    for (let i = 0; i < subreddits.length; i++) {
+        for (let j = 0; i < subreddits[i].posts.length; j++){
+            if( subreddits[i].posts[j].post_hint === undefined){
+
+                subredditsImg.posts.push({
+
+                    "title": subreddits[i].posts[j].title,
+                    "url": subreddits[i].posts[j].url,
+                    "ups": subreddits[i].posts.ups,
+                    "numComments": subreddits[j].posts[j].num_comments,
+                    "comments": [],
+
+
+                });
+            }
+        }
+
+    }
 
 }
 
@@ -42,6 +65,29 @@ function setup(){
     midX = width / 2;
     midY = height / 2;
 
+
+    //Image Speicher
+
+   /* for (let i = 0; i < subreddits.length; i++) {
+        for (let j = 0; i < subreddits[i].posts.length; j++){
+            if( subreddits[i].posts.post_hint == 'image'){
+
+                subredditsImg[index].posts.push({
+
+                    "title": subreddits[j].posts.title,
+                    "url": subreddits[j].posts.url,
+                    "ups": subreddits[j].posts.ups,
+                    "numComments": subreddits[j].posts.num_comments,
+                    "comments": [],
+
+
+                });
+            }
+        }
+
+    }*/
+
+    // Image Storrage
 
 
     /*   for (let i = 0; i < redditJson.data.children.length; i++) {
@@ -109,6 +155,7 @@ function draw(){
 
 
 
+
     // fill(50, 50, 50, alphaWrong);
     // text("This is wrong", midX, midY - 50);
 
@@ -159,5 +206,8 @@ function onclicklower() {
 
 }
 function testebutton(){
-    console.log(subreddits[subreddits.length - 1])
+    console.log(subredditsImg)
+    console.log(subreddits)
+    console.log(subreddits.length)
+
 }

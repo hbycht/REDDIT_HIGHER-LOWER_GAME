@@ -38,6 +38,7 @@ function formatData(d){
                 "url": d.data.children[i].data.url,
                 "ups": d.data.children[i].data.ups,
                 "numComments": d.data.children[i].data.num_comments,
+                "post_hint": d.data.children[i].data.post_hint,
                 "comments": [],
             });
         }
