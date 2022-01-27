@@ -8,9 +8,14 @@ function preload() {
 
     // ** Load all reddit .json (You can add even more; maybe it gets a bit overloaded) **//
     loadSubreddit("Showerthoughts");
-    // loadSubreddit("askreddit");
-    // loadSubreddit("askscience");
-    // loadSubreddit("askwomen");
+    loadSubreddit("memes");
+    loadSubreddit("AskReddit");
+    loadSubreddit("AskScience");
+    loadSubreddit("AskWomen");
+    loadSubreddit("ama");
+    loadSubreddit("ich_iel");
+    loadSubreddit("me_irl");
+
 }
 
 //*** SETUP */
@@ -25,6 +30,8 @@ function setup() {
     // Some general settings
     colorMode(HSB, 360, 100, 100, 100);
     textAlign(CENTER, CENTER);
+
+    setupGame();
     
     // Log all subreddits
     print("API data: ");
@@ -39,6 +46,7 @@ function setup() {
 //*** DRAW */
 function draw() {
 
+    drawGame();
     // Loading comments
     // latest subreddit
     let lastSubreddit = subreddits.length-1;
@@ -53,7 +61,7 @@ function draw() {
     // Spacing between each subreddit
     let ySpacing = height / (subreddits.length + 1);
 
-    for(let j = 0; j < subreddits.length; j++) {
+    /*for(let j = 0; j < subreddits.length; j++) {
         
         // Calculate yPosition
         const y = ySpacing * (j + 1);
@@ -125,6 +133,6 @@ function draw() {
                 }
             }
         }
-    }
+    }*/
     
 }

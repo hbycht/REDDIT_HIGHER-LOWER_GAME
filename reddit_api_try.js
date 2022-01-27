@@ -22,80 +22,7 @@ let index = 0;
 let score = 0;
 let richtigoderfalsch = "Viel Glück beim Raten";
 
-function preload(){
-    redditJson = loadJSON('https://www.reddit.com/r/AMA/.json');
-
-    loadSubreddit("memes");
-    loadSubreddit("AskReddit");
-    loadSubreddit("AskScience");
-    loadSubreddit("AskWomen");
-    loadSubreddit("ama");
-    loadSubreddit("ich_iel");
-    loadSubreddit("me_irl");
-
-    for (let i = 0; i < subreddits.length; i++) {
-        for (let j = 0; i < subreddits[i].posts.length; j++){
-            if( subreddits[i].posts[j].post_hint === undefined){
-
-                subredditsImg.posts.push({
-
-                    "title": subreddits[i].posts[j].title,
-                    "url": subreddits[i].posts[j].url,
-                    "ups": subreddits[i].posts.ups,
-                    "numComments": subreddits[j].posts[j].num_comments,
-                    "comments": [],
-
-
-                });
-            }
-        }
-
-    }
-
-}
-
-function setup(){
-
-    createCanvas(windowWidth * 0.8, windowHeight * 0.8);
-    colorMode(HSB, 360, 100, 100, 100);
-
-    initSubmitGUI();
-    midX = width / 2;
-    midY = height / 2;
-
-
-    //Image Speicher
-
-   /* for (let i = 0; i < subreddits.length; i++) {
-        for (let j = 0; i < subreddits[i].posts.length; j++){
-            if( subreddits[i].posts.post_hint == 'image'){
-
-                subredditsImg[index].posts.push({
-
-                    "title": subreddits[j].posts.title,
-                    "url": subreddits[j].posts.url,
-                    "ups": subreddits[j].posts.ups,
-                    "numComments": subreddits[j].posts.num_comments,
-                    "comments": [],
-
-
-                });
-            }
-        }
-
-    }*/
-
-    // Image Storrage
-
-
-    /*   for (let i = 0; i < redditJson.data.children.length; i++) {
-           redditData.push({
-               "ups": redditJson.data.children[i].data.ups,
-               "title": redditJson.data.children[i].data.title,
-           });
-       }*/
-
-    //console.log(redditData);
+function setupGame(){
 
     buttonAnswer1 = createButton('Answer1');
     buttonAnswer2 = createButton('Answer2');
@@ -107,15 +34,13 @@ function setup(){
     buttonAnswer3.position(midX - 250, midY + 100);
 
     randomSubreddit = int(random(0, subreddits.length));
-    console.log(randomSubreddit)
     randomPost = int(random(0, subreddits[randomSubreddit].posts.length));
 
-    startReddit = randomSubreddit;
-    startPost = randomPost;
+    startReddit = int(randomSubreddit / 2);
+    startPost = int(randomPost / 2);
 }
 
-function draw(){
-    background(0);
+function drawGame(){
 
     fill(100, 100, 100, 100);
     text("Which Post has more likes?", midX, midY - 100);
@@ -144,19 +69,9 @@ function draw(){
     fill(50, 50, 50, 100);
     text(subreddits[randomSubreddit].name, midX, midY + 70);
 
-
-
     buttonAnswer1.mousePressed(onclickhigher)
     buttonAnswer2.mousePressed(onclicklower)
-    buttonAnswer3.mousePressed(testebutton)
-
-
-
-
-
-    // fill(50, 50, 50, alphaWrong);
-    // text("This is wrong", midX, midY - 50);
-
+    //buttonAnswer3.mousePressed(testebutton)
 
 }
 
@@ -203,9 +118,10 @@ function onclicklower() {
     }
 
 }
+/*
 function testebutton(){
     console.log(subredditsImg)
     console.log(subreddits)
     console.log(subreddits.length)
 
-}
+}*/

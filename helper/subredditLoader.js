@@ -64,6 +64,7 @@ function formatPosts(d){
                 "url": "https://www.reddit.com/" + d.data.children[i].data.permalink,
                 "ups": d.data.children[i].data.ups,
                 "numComments": d.data.children[i].data.num_comments,
+
             });
         }
 
