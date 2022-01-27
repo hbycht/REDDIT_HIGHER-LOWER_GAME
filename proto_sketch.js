@@ -8,6 +8,8 @@ function preload() {
 
     // ** Load all reddit .json (You can add even more; maybe it gets a bit overloaded) **//
     loadSubreddit("Showerthoughts");
+    actualSubreddit = subreddits[0];
+
 
 }
 
@@ -34,6 +36,8 @@ function setup() {
     midY = height / 2;
 
     // speaker.listVoices();
+    showPost(0)
+    showPost(1)
 }
 
 //*** DRAW */
@@ -51,11 +55,12 @@ function draw() {
     // Clean sketch with fresh background
     background(240, 10, 10, 100);
 
+
     // Spacing between each subreddit
     let ySpacing = height / (subreddits.length + 1);
 
     /*for(let j = 0; j < subreddits.length; j++) {
-        
+
         // Calculate yPosition
         const y = ySpacing * (j + 1);
 

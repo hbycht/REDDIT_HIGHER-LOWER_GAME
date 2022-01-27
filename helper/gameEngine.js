@@ -25,6 +25,9 @@ let buttonAnswer2;
 let midX;
 let midY;
 
+let actualPostleft = {};
+let actualPostright = {};
+
 let randomSubreddit = 0;
 let randomPost;
 let startReddit;
@@ -40,15 +43,40 @@ function loadNextRound() {
     // load next subreddit into subreddits[] (loadSubreddit in background)
     actualSubreddit = nextSubreddit;
     nextSubreddit = subreddits[subreddits.length - 1];
-    loadSubreddit(random(listOfSubredditNames));
-    subreddits.shift();
+    loadSubreddit(listOfSubredditNames[int(random(listOfSubredditNames))]);
+    actualPostleft = actualSubreddit.posts[int(random(actualSubreddit.posts))]
+    actualPostright = actualSubreddit.posts[int(random(actualSubreddit.posts))]
+    subreddits.shift(); // warum subreddits?
 
 }
 
 // to show the post (index for left or right)
 function showPost(index) {
+
+    let recxmid = midX - 600;
+    let recymid = midY - 200;
+    let recxmid2 = midX + 300;
     // zeichne rechteck usw.
     // schreibe post text oder bild...
+
+console.log(actualPost);
+
+
+    if(index == 0){
+
+        rect(recxmid,recymid,300,400);
+        textAlign(CENTER);
+        text(actualPost.title,recxmid -300,recymid -100 )
+    }else{
+        let recxmid2 = midX + 300;
+
+        rect(recxmid2,recymid,300,400)
+        textAlign(CENTER);
+        text(actualPost.title,recxmid2 - 150,recymid -100)
+    }
+
+
+
 
     // show post 1 of actual subreddit
     // actualSubreddit.posts[1].ups
