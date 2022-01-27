@@ -20,11 +20,11 @@ function initSubmitGUI() {
     subredditSubmissionButton = createButton('add');
     
     // Display
-    subredditSubmissionText.position(20, 5);
+    subredditSubmissionText.position(20, -5);
     subredditSubmissionText.style("color", "#ffe7b3");
     subredditSubmissionInput.id("subredditSubmission");
-    subredditSubmissionInput.position(20, 65);
-    subredditSubmissionButton.position(subredditSubmissionInput.x + subredditSubmissionInput.width, 65);
+    subredditSubmissionInput.position(20, 48);
+    subredditSubmissionButton.position(subredditSubmissionInput.x + subredditSubmissionInput.width, subredditSubmissionInput.y);
 
     // Event-listener for button pressed
     subredditSubmissionButton.mousePressed(addSubreddit);
