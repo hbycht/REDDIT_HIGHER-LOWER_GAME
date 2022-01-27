@@ -7,7 +7,8 @@ let subredditSubmissionInput, subredditSubmissionText, subredditSubmissionButton
 function addSubreddit() {
     let n = document.getElementById("subredditSubmission").value;
     console.log("input: " + n);
-    loadSubreddit(n);
+    listOfSubredditNames.push(n);
+    console.log(listOfSubredditNames);
     document.getElementById("subredditSubmission").value = "";
     
 }
