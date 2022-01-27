@@ -96,7 +96,7 @@ function formatComments(d){
 
             // console.log(commentPath[i].data.body);
         }
-        console.log(subreddits[currentSubredditIndex].comments);
+        // console.log(subreddits[currentSubredditIndex].comments);
 
         console.log("--------------------\n| Comments loaded. |\n--------------------");
 

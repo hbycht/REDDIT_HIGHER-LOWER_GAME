@@ -40,7 +40,7 @@ function setup() {
     midX = width / 2;
     midY = height / 2;
 
-    speaker.listVoices();
+    // speaker.listVoices();
 }
 
 //*** DRAW */
