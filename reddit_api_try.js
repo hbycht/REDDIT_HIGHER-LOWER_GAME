@@ -27,13 +27,32 @@ let richtigoderfalsch = "Viel Glück beim Raten";
 function preload(){
     redditJson = loadJSON('https://www.reddit.com/r/AMA/.json');
 
-    loadSubreddit("AMA");
+    loadSubreddit("memes");
     loadSubreddit("AskReddit");
     loadSubreddit("AskScience");
     loadSubreddit("AskWomen");
-    loadSubreddit("memes");
+    loadSubreddit("ama");
     loadSubreddit("ich_iel");
     loadSubreddit("me_irl");
+
+    for (let i = 0; i < subreddits.length; i++) {
+        for (let j = 0; i < subreddits[i].posts.length; j++){
+            if( subreddits[i].posts[j].post_hint === undefined){
+
+                subredditsImg.posts.push({
+
+                    "title": subreddits[i].posts[j].title,
+                    "url": subreddits[i].posts[j].url,
+                    "ups": subreddits[i].posts.ups,
+                    "numComments": subreddits[j].posts[j].num_comments,
+                    "comments": [],
+
+
+                });
+            }
+        }
+
+    }
 
 }
 
