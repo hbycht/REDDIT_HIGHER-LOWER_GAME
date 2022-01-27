@@ -165,10 +165,9 @@ function showResults() {
 
         // Calculate xPosition
         const x = width / 5 * (i + 1) - 170;
-        console.log("x" + x);
 
         let cDot = lerp(cDotFrom, cDotTo, 1/25 * i);
-        console.log("cDot " + cDot);
+        
         fill(dist(mouseX, mouseY, x, y) < diameter / 2 + 10 ? cDot - 120 : cDot, 80, 100, 100);
         ellipse(x, y, dist(mouseX, mouseY, x, y) < diameter / 2 + 10 ? diameter + 0.22 * (width / 5 * (i + 1)) : diameter);
 
