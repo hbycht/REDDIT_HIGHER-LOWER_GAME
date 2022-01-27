@@ -35,7 +35,7 @@ function setup() {
     midX = width / 2;
     midY = height / 2;
 
-    loadNextRound();
+    // loadNextRound();
 
     // speaker.listVoices();
 
@@ -57,8 +57,8 @@ function draw() {
     background(240, 10, 10, 100);
 
 
-    showPost(0)
-    showPost(1)
+    showPosts();
+
     // Spacing between each subreddit
     let ySpacing = height / (subreddits.length + 1);
 

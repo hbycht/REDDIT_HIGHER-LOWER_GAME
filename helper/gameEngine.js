@@ -56,7 +56,7 @@ function loadNextRound() {
 }
 
 // to show the post (index for left or right)
-function showPost(index) {
+function showPosts() {
 
     let recxmid = midX - 600;
     let recymid = midY - 200;
@@ -64,24 +64,15 @@ function showPost(index) {
     // zeichne rechteck usw.
     // schreibe post text oder bild...
 
-    if(index == 0){
+    // left post
+    rect(recxmid,recymid,300,400);
+    textAlign(CENTER);
+    text(actualPostleft.title,recxmid -300,recymid -100 , 300, 600);
 
-        rect(recxmid,recymid,300,400);
-        textAlign(CENTER);
-        text(actualPostleft.title,recxmid -300,recymid -100 )
-    }else{
-        let recxmid2 = midX + 300;
-
-        rect(recxmid2,recymid,300,400)
-        textAlign(CENTER);
-        text(actualPostright.title,recxmid2 - 150,recymid -100)
-    }
-
-
-
-
-    // show post 1 of actual subreddit
-    // actualSubreddit.posts[1].ups
+    // right post
+    rect(recxmid2,recymid,300,400);
+    textAlign(CENTER);
+    text(actualPostright.title,recxmid2 - 150,recymid -100 , 300, 600);
 }
 
 // handler onClick (index for left or right)
@@ -96,6 +87,7 @@ function showScore() {
 
 function setupGame(){
 
+    nextSubreddit = subreddits[0];
     loadNextRound();
 
     // buttonAnswer1 = createButton('Answer1');
