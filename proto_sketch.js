@@ -1,9 +1,11 @@
 /// <reference path="./TSDef/p5.global-mode.d.ts" />
 
-let DongleBold;
+let DongleRegular;
 let BebasNeue;
 let OswaldMedium;
-let Like;
+let like;
+let sound;
+let colorBackground;
 
 //*** PRELOAD */
 function preload() {
@@ -14,12 +16,13 @@ function preload() {
     loadSubreddit("Showerthoughts");
 
     // FONTS
-    DongleBold = loadFont('assets/Fonts/Dongle-Bold.ttf');
+    DongleRegular = loadFont('assets/Fonts/Dongle-Regular.ttf');
     BebasNeue = loadFont('assets/Fonts/BebasNeue-Regular.ttf');
     OswaldMedium = loadFont('assets/Fonts/Oswald-Medium.ttf');
 
     // IMAGES
-    Like = loadImage('assets/Images/round_thumb_up_white_48dp.png');
+    like = loadImage('assets/Images/like.png');
+    sound = loadImage('assets/Images/sound.svg');
 
 
 
@@ -28,7 +31,8 @@ function preload() {
 //*** SETUP */
 function setup() {
 
-
+    colorMode(HSB,360,100,100);
+    colorBackground = color(16, 12, 95);
     createCanvas(windowWidth * 0.8, windowHeight * 0.8);
 
     // GUI to add subreddits
@@ -55,6 +59,8 @@ function setup() {
 
 //*** DRAW */
 function draw() {
+    // Clean sketch with fresh background
+    background (colorBackground);
 
     drawGame();
     // Loading comments
@@ -64,9 +70,6 @@ function draw() {
         let randomPost = floor(random(subreddits[currentLoadingIndex].posts.length));
         loadComments(currentLoadingIndex, randomPost);
     }
-
-    // Clean sketch with fresh background
-    background(240, 10, 10, 100);
 
 
     showPosts();

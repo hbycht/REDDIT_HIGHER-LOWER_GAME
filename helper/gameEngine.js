@@ -38,7 +38,6 @@ let score = 0;
 let richtigoderfalsch = "Viel Glück beim Raten";
 
 
-
 // load next subreddit into temp
 function loadNextRound() {
     // load random subreddit out of subreddits[] into tempSubreddit
@@ -48,7 +47,7 @@ function loadNextRound() {
 
     loadSubreddit(random(listOfSubredditNames));
 
-    console.log("Achtual Subreddit: " + actualSubreddit.name);
+    console.log("Actual Subreddit: " + actualSubreddit.name);
 
     actualPostleft = random(actualSubreddit.posts);
     actualPostright = random(actualSubreddit.posts);
@@ -59,10 +58,15 @@ function loadNextRound() {
 
 // to show the post (index for left or right)
 function showPosts() {
+    //  Variables for colors
+    let colorTitel = color(5, 69, 95);
+    let colorUntertitel = color( 16, 73, 35);
+    let colorText = color(0, 0, 100);
+    let colorBox = color(276, 29, 95);
 
-//    stroke(100);
-//    line(midX, 0, midX, height);
-//    noStroke();
+    //    stroke(100);
+    //    line(midX, 0, midX, height);
+    //    noStroke();
 
     let rectWidth = 400;
     let rectHeight = height/2;
@@ -70,31 +74,48 @@ function showPosts() {
     let rectRightX = midX + 100;
     let rectY = midY - 100;
 
+
     // left post
     textFont(OswaldMedium);
-    fill('#4BA651');
+    fill(colorBox);
     rectMode(CORNER);
+    noStroke();
     rect(rectLeftX, rectY, rectWidth, rectHeight, 20);
     textAlign(LEFT, TOP);
-    fill('#F2CB05');
+    fill(colorText);
     textSize(21);
     text(actualPostleft.title,rectLeftX + 50, rectY + 30 , 300, 600);
 
     // right post
     textFont(OswaldMedium);
-    fill('#4BA651');
+    fill(colorBox);
     rectMode(CORNER);
+    noStroke();
     rect(rectRightX, rectY, rectWidth, rectHeight, 20);
     textAlign(LEFT, TOP);
-    fill('#F2CB05');
+    fill(colorText);
     textSize(21);
     text(actualPostright.title, rectRightX + 50, rectY + 30, 300, 600);
 
+    image(sound, 200, 300);
 
  // header
     textSize(60);
-    fill('#F2B705');
-    text("r/" + actualSubreddit.name, midX-200, midY-200);
+    textFont(BebasNeue);
+    fill(colorTitel);
+    textAlign(CENTER, TOP);
+    text("Which post has more likes?", midX, 0.05*height)
+    textSize(25);
+    fill(colorUntertitel);
+    textFont(OswaldMedium);
+    text("r/" + actualSubreddit.name, midX, 0.17*height);
+
+ // Untertitel
+    console.log(actualSubreddit.numFollows);
+    textSize(15);
+    fill(colorUntertitel);
+    textFont(OswaldMedium);
+    text("Members: " + actualSubreddit.numFollows, midX, 0.24*height);
 
 
 
@@ -111,6 +132,7 @@ function showScore() {
 }
 
 function setupGame(){
+
 
     nextSubreddit = subreddits[0];
     loadNextRound();
