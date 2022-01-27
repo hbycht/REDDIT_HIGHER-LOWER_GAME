@@ -57,7 +57,8 @@ function draw() {
     background(240, 10, 10, 100);
 
 
-    showPosts();
+    //showPosts();
+    showResults()
 
     // Spacing between each subreddit
     let ySpacing = height / (subreddits.length + 1);

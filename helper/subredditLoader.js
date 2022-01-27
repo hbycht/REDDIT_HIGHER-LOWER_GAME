@@ -58,6 +58,7 @@ function formatPosts(d){
             "posts": [],
             "comments": [],
             "commentsLoaded": false,
+
         });
 
         // Get current index of subreddit in list
@@ -76,7 +77,8 @@ function formatPosts(d){
                 "url": "https://www.reddit.com/" + d.data.children[i].data.permalink,
                 "ups": d.data.children[i].data.ups,
                 "numComments": d.data.children[i].data.num_comments,
-
+                "post_hint": d.data.children[i].data.post_hint,
+                "selftext": d.data.children[i].data.selftext
             });
         }
 

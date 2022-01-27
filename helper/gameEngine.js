@@ -21,6 +21,8 @@ let alphaWrong = 0;
 let buttonAnswer1;
 let buttonAnswer2;
 
+let actualSubredditMax;
+let actualSubredditMin;
 
 let midX;
 let midY;
@@ -43,6 +45,16 @@ function loadNextRound() {
     // load next subreddit into subreddits[] (loadSubreddit in background)
     actualSubreddit = nextSubreddit;
     nextSubreddit = subreddits[subreddits.length - 1];
+
+    let tempData = [];
+    actualSubreddit.posts.forEach(sub => {
+
+        tempData.push(sub.ups);
+
+    });
+
+    actualSubredditMax = max(tempData);
+    actualSubredditMin = min(tempData);
 
     loadSubreddit(random(listOfSubredditNames));
 
@@ -90,8 +102,107 @@ function selectPost(index) {
     // change gameState
 }
 
-// show gameScore
-function showScore() {
+// show gameResults
+function showResults() {
+    let recxmid = midX - width / 2.5;
+    let recymid = midY - 200;
+    let recxmid2 = midX + width / 5;
+
+    if(actualPostleft.ups < actualPostright.ups){
+        fill(120, 100, 50);
+        rect(recxmid, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        text(actualPostleft.ups, recxmid, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        rect(recxmid2, recymid, 300, 200);
+
+        fill(150, 100, 50);
+        text(actualPostright.ups, recxmid2, recymid, 300, 200);
+
+    }else if(actualPostleft.ups > actualPostright.ups){
+        fill(0, 100, 50);
+        rect(recxmid, recymid, 300, 200);
+
+        fill(150, 100, 50);
+        text(actualPostleft.ups, recxmid, recymid, 300, 200);
+
+        fill(120, 100, 50);
+        rect(recxmid2, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        text(actualPostright.ups, recxmid2, recymid, 300, 200);
+
+    }else{
+        fill(120, 100, 50);
+        rect(recxmid, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        text(actualPostleft.ups, recxmid, recymid, 300, 200);
+
+        fill(120, 100, 50);
+        rect(recxmid2, recymid, 300, 200);
+
+        fill(0, 100, 50);
+        text(actualPostright.ups, recxmid2, recymid, 300, 200);
+    }
+    fill(120, 100, 50);
+    text("Score: " + score, midX - 100, midY - 50, 200, 100);
+
+    fill(0, 100, 30);
+    rect(midX - 200, midY + 200, 400, 75);
+    textAlign(CENTER);
+    fill(0);
+    text("next subreddit ==>", midX - 200, midY + 200, 400, 75);
+
+    for(let i = 5; i >= 0; i--){
+        let cDotFrom = 160;
+        let cDotTo = 240;
+        let y = midY + 100;
+        // Dot size depending on upvote
+        let diameter = map(actualSubreddit.posts[i].ups, actualSubredditMin, actualSubredditMax, 2, 150);
+
+        // Calculate xPosition
+        const x = width / 5 * (i + 1) - 170;
+
+        let cDot = lerp(cDotFrom, cDotTo, 1/25 * i);
+        
+        fill(dist(mouseX, mouseY, x, y) < diameter / 2 + 10 ? cDot - 120 : cDot, 80, 100, 100);
+        ellipse(x, y, dist(mouseX, mouseY, x, y) < diameter / 2 + 10 ? diameter + 0.22 * (width / 5 * (i + 1)) : diameter);
+
+        // onHover: highlight dot & show respective title
+        if(dist(mouseX, mouseY, x, y) < diameter / 2 + 10) {
+            textAlign(CENTER, BOTTOM)
+            fill(cDot - 120, 50, 100, 100);
+            textSize(11);
+            textStyle(BOLD);
+            text(actualSubreddit.posts[i].ups, x, y - diameter / 2 - 20);
+            textSize(16);
+            textStyle(BOLD)
+            text(actualSubreddit.posts[i].title, 0.2 * width, 0.75 * height, width * 0.6, height * 0.2);
+
+            // onClick: Speak out post title
+            if(!isSpeaking && mouseIsPressed) {
+                let keyword = actualSubreddit.posts[i].title;
+                // speakKeyword(keyword);
+            }
+        }
+    }
+}
+
+function manageGameState(timer){
+
+    if(timer < 1){
+        showPosts();
+
+    }else if(timer === 1){
+        showResults();
+
+    }
+}
+
+function showScore(){
 
 }
 
