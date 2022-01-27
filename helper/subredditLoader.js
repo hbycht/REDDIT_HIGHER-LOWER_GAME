@@ -83,12 +83,12 @@ function formatPosts(d){
     }
 }
 
-// Pull out & format the important data 
+// Pull out & format the important data
 function formatComments(d){
 
     let commentPath = d[1].data.children;
 
-    if(commentPath.length > 0) {        
+    if(commentPath.length > 0) {
         // Push comments into list
         for (let i = 0; i < commentPath.length - 1; i++) {
             subreddits[currentSubredditIndex].comments.push(commentPath[i].data.body);

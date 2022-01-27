@@ -14,7 +14,7 @@ function preload() {
 }
 
 //*** SETUP */
-function setup() {    
+function setup() {
 
 
     createCanvas(windowWidth * 0.8, windowHeight * 0.8);
@@ -46,7 +46,7 @@ function draw() {
         let randomPost = floor(random(subreddits[currentLoadingIndex].posts.length));
         loadComments(currentLoadingIndex, randomPost);
     }
-        
+
     // Clean sketch with fresh background
     background(240, 10, 10, 100);
 
@@ -77,7 +77,7 @@ function draw() {
 
         // Button to hear the comments
         if(subreddits[j].comments.length > 0){
-            
+
             // button action
             if(dist(mouseX, mouseY, midX, y - xSpacing - 10) < xSpacing * 0.75) {
                 fill(cDotFrom, 100, 100, 100);
