@@ -37,6 +37,8 @@ let index = 0;
 let score = 0;
 let richtigoderfalsch = "Viel Glück beim Raten";
 
+
+
 // load next subreddit into temp
 function loadNextRound() {
     // load random subreddit out of subreddits[] into tempSubreddit
@@ -58,31 +60,44 @@ function loadNextRound() {
 // to show the post (index for left or right)
 function showPosts() {
 
-    stroke(100);
-    line(midX, 0, midX, height);
-    noStroke();
+//    stroke(100);
+//    line(midX, 0, midX, height);
+//    noStroke();
 
     let rectWidth = 400;
-    let rectHeight = 500;
+    let rectHeight = height/2;
     let rectLeftX = midX - rectWidth - 100;
     let rectRightX = midX + 100;
-    let rectY = midY - 200;
+    let rectY = midY - 100;
 
     // left post
-    fill(200, 100, 100, 50);
+    textFont(OswaldMedium);
+    fill('#4BA651');
     rectMode(CORNER);
-    rect(rectLeftX, rectY, rectWidth, rectHeight);
-    textAlign(RIGHT, TOP);
-    fill(100, 100, 100, 100);
-    text(actualPostleft.title,rectLeftX + 50, rectY +100 , 300, 600);
+    rect(rectLeftX, rectY, rectWidth, rectHeight, 20);
+    textAlign(LEFT, TOP);
+    fill('#F2CB05');
+    textSize(21);
+    text(actualPostleft.title,rectLeftX + 50, rectY + 30 , 300, 600);
 
     // right post
-    fill(20, 100, 100, 50);
+    textFont(OswaldMedium);
+    fill('#4BA651');
     rectMode(CORNER);
-    rect(rectRightX, rectY, rectWidth, rectHeight);
+    rect(rectRightX, rectY, rectWidth, rectHeight, 20);
     textAlign(LEFT, TOP);
-    fill(100, 100, 100, 100);
-    text(actualPostright.title, rectRightX + 50, rectY +100, 300, 600);
+    fill('#F2CB05');
+    textSize(21);
+    text(actualPostright.title, rectRightX + 50, rectY + 30, 300, 600);
+
+
+ // header
+    textSize(60);
+    fill('#F2B705');
+    text("r/" + actualSubreddit.name, midX-200, midY-200);
+
+
+
 }
 
 // handler onClick (index for left or right)
