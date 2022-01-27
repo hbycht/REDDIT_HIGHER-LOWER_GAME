@@ -164,20 +164,17 @@ function showResults() {
             fill(cDot - 120, 50, 100, 100);
             textSize(11);
             textStyle(BOLD);
-            text(subreddits[j].posts[i].ups, x, y - diameter / 2 - 20);
+            text(ups, x, y - diameter / 2 - 20);
             textSize(16);
             textStyle(BOLD)
-            text(subreddits[j].posts[i].title, 0.2 * width, 0.75 * height, width * 0.6, height * 0.2);
+            text(actualSubreddit.posts[i].title, 0.2 * width, 0.75 * height, width * 0.6, height * 0.2);
 
             // onClick: Speak out post title
             if(!isSpeaking && mouseIsPressed) {
-                let keyword = subreddits[j].posts[i].title;
+                let keyword = actualSubreddit.posts[i].title;
                 // speakKeyword(keyword);
-                console.log(subreddits[j].comments);
             }
         }
-
-
     }
 }
 
