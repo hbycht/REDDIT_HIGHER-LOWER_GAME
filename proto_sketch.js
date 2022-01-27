@@ -14,7 +14,7 @@ function preload() {
 //*** SETUP */
 function setup() {
 
-
+    frameRate(30);
     createCanvas(windowWidth * 0.8, windowHeight * 0.8);
 
     // GUI to add subreddits
@@ -22,8 +22,13 @@ function setup() {
 
     // Some general settings
     colorMode(HSB, 360, 100, 100, 100);
+    noStroke();
     textAlign(CENTER, CENTER);
 
+    angleMode(DEGREES);
+    smooth();
+
+    initParticles();
     setupGame();
     
     // Log all subreddits
@@ -49,7 +54,8 @@ function draw() {
     }
 
     // Clean sketch with fresh background
-    background(240, 10, 10, 100);
+    // background(240, 10, 10, 100);
+    drawFlowfield();
 
     // Spacing between each subreddit
     let ySpacing = height / (subreddits.length + 1);
