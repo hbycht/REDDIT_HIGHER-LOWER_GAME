@@ -81,8 +81,7 @@ function draw() {
             // button action
             if(dist(mouseX, mouseY, midX, y - xSpacing - 10) < xSpacing * 0.75) {
                 fill(cDotFrom, 100, 100, 100);
-                if(speakingQueue.length < 10)
-                    speakKeyword(subreddits[j].comments[floor(random(subreddits[j].comments.length))])
+                speakKeyword(subreddits[j].comments[floor(random(subreddits[j].comments.length))])
             } else {
                 fill(20, 100, 100, 100);
                 stopSpeaking();

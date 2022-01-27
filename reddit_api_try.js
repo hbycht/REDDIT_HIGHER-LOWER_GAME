@@ -9,8 +9,6 @@ let buttonAnswer2;
 
 let subreddits = [];
 let subredditsImg = [];
-let dataMin = 1;
-let dataMax;
 
 let midX;
 let midY;

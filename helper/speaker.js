@@ -7,6 +7,7 @@ let speaker = new p5.Speech(speakerVoice); // speech synthesis object
 speaker.setRate(1.0);
 speaker.setPitch(0.8);
 speaker.onEnd = function(e) {
+    speakingQueue.pop();
     isSpeaking = false;
     speakerVoice = floor(random(60));
     speaker.setVoice(speakerVoice);
@@ -15,10 +16,13 @@ speaker.onEnd = function(e) {
 let isSpeaking = false;
 
 function speakKeyword(keyword) {
-    speakingQueue.push(keyword);
-    isSpeaking = true;
-    speaker.speak(speakingQueue.pop()); // say something
-    // console.log("Speaker says: " + keyword);
+    if(speakingQueue.length < 6) {
+        speakingQueue.push(keyword);
+        isSpeaking = true;
+        speaker.speak(speakingQueue[speakingQueue.length - 1]); // say something
+        console.log(speakingQueue);
+    }
+    
 }
 
 function stopSpeaking() {
