@@ -58,21 +58,31 @@ function loadNextRound() {
 // to show the post (index for left or right)
 function showPosts() {
 
-    let recxmid = midX - 600;
-    let recymid = midY - 200;
-    let recxmid2 = midX + 300;
-    // zeichne rechteck usw.
-    // schreibe post text oder bild...
+    stroke(100);
+    line(midX, 0, midX, height);
+    noStroke();
+
+    let rectWidth = 400;
+    let rectHeight = 500;
+    let rectLeftX = midX - rectWidth - 100;
+    let rectRightX = midX + 100;
+    let rectY = midY - 200;
 
     // left post
-    rect(recxmid,recymid,300,400);
-    textAlign(CENTER);
-    text(actualPostleft.title,recxmid -300,recymid -100 , 300, 600);
+    fill(200, 100, 100, 50);
+    rectMode(CORNER);
+    rect(rectLeftX, rectY, rectWidth, rectHeight);
+    textAlign(RIGHT, TOP);
+    fill(100, 100, 100, 100);
+    text(actualPostleft.title,rectLeftX + 50, rectY +100 , 300, 600);
 
     // right post
-    rect(recxmid2,recymid,300,400);
-    textAlign(CENTER);
-    text(actualPostright.title,recxmid2 - 150,recymid -100 , 300, 600);
+    fill(20, 100, 100, 50);
+    rectMode(CORNER);
+    rect(rectRightX, rectY, rectWidth, rectHeight);
+    textAlign(LEFT, TOP);
+    fill(100, 100, 100, 100);
+    text(actualPostright.title, rectRightX + 50, rectY +100, 300, 600);
 }
 
 // handler onClick (index for left or right)
