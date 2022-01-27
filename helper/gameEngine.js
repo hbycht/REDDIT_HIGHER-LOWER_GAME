@@ -21,6 +21,8 @@ let alphaWrong = 0;
 let buttonAnswer1;
 let buttonAnswer2;
 
+let actualSubredditMax;
+let actualSubredditMin;
 
 let midX;
 let midY;
@@ -43,6 +45,16 @@ function loadNextRound() {
     // load next subreddit into subreddits[] (loadSubreddit in background)
     actualSubreddit = nextSubreddit;
     nextSubreddit = subreddits[subreddits.length - 1];
+
+    let tempData = [];
+    actualSubreddit.posts.forEach(sub => {
+
+        tempData.push(sub.ups);
+
+    });
+
+    actualSubredditMax = max(tempData);
+    actualSubredditMin = min(tempData);
 
     loadSubreddit(random(listOfSubredditNames));
 
@@ -144,19 +156,21 @@ function showResults() {
     fill(0);
     text("next subreddit ==>", midX - 200, midY + 200, 400, 75);
 
-    for(let i = 1; i <= 5; i++){
+    for(let i = 5; i >= 0; i--){
         let cDotFrom = 160;
         let cDotTo = 240;
-        let y = midY - 100;
+        let y = midY + 100;
         // Dot size depending on upvote
-        let diameter = map(actualSubreddit.posts[i], dataMin, dataMax, 2, width / i);
+        let diameter = map(actualSubreddit.posts[i].ups, actualSubredditMin, actualSubredditMax, 2, 150);
 
         // Calculate xPosition
-        const x = (width / i) * (i + 1);
+        const x = width / 5 * (i + 1) - 170;
+        console.log("x" + x);
 
         let cDot = lerp(cDotFrom, cDotTo, 1/25 * i);
+        console.log("cDot " + cDot);
         fill(dist(mouseX, mouseY, x, y) < diameter / 2 + 10 ? cDot - 120 : cDot, 80, 100, 100);
-        ellipse(x, y, dist(mouseX, mouseY, x, y) < diameter / 2 + 10 ? diameter + 0.22 * (width / i) : diameter);
+        ellipse(x, y, dist(mouseX, mouseY, x, y) < diameter / 2 + 10 ? diameter + 0.22 * (width / 5 * (i + 1)) : diameter);
 
         // onHover: highlight dot & show respective title
         if(dist(mouseX, mouseY, x, y) < diameter / 2 + 10) {
@@ -164,7 +178,7 @@ function showResults() {
             fill(cDot - 120, 50, 100, 100);
             textSize(11);
             textStyle(BOLD);
-            text(ups, x, y - diameter / 2 - 20);
+            text(actualSubreddit.posts[i].ups, x, y - diameter / 2 - 20);
             textSize(16);
             textStyle(BOLD)
             text(actualSubreddit.posts[i].title, 0.2 * width, 0.75 * height, width * 0.6, height * 0.2);
