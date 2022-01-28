@@ -49,6 +49,7 @@ let minDimension = Math.min(window.innerWidth, window.innerHeight);
 let canvasWidth = window.innerWidth;
 let canvasHeight = window.innerHeight;
 
+let colors;
 
 
 /* ###########################################################################
@@ -70,6 +71,13 @@ function drawForce(xPos, yPos, dir, pow) {
 }
 
 function initParticles() {
+
+  colors = [
+    colorHigher,
+    colorLower,
+    colorPosts
+  ];
+
   let randomScale = random(1 / 2, 2);
 
   particles = [];
@@ -94,7 +102,7 @@ function drawParticle(p, forces) {
   push();
 
   // draw particle
-  stroke(p.col, 100, 100, 100);
+  stroke(p.col);
   strokeWeight(p.size);
   line(p.xPos, p.yPos, p.preX, p.preY);
 
@@ -130,7 +138,7 @@ function drawParticle(p, forces) {
 
     let randomScale = random(1 / 2, 2);
 
-    p.col = drawingParams.particleColorBegin;
+    p.col = random(colors);
     p.preX = p.xPos;
     p.preY = p.yPos;
     p.rot = null;
