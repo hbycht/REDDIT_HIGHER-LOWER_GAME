@@ -131,8 +131,8 @@ function showPosts() {
 
     let postW = 10 * col;
     let postH = 0.5 * height;
-    let postLeftX = midX - 5.5*col;
-    let postRightX = midX + 5.5*col;
+    let postLeftX = midX - 6.5*col;
+    let postRightX = midX + 6.5*col;
     let postY = 0.6 * height;
     let postCorner = 6;
 
@@ -160,12 +160,17 @@ function showPosts() {
     rect(postLeftX, postY, hoverRect(postLeftX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
     fill(hoverRect(postRightX, postY, postW, postH) ? colorPostsHover : colorPosts);
     rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
-    image(compare, midX-48, midY);
-    // audioComments just if comments are loaded
-    if(actualPostLeft.commentsLoaded)
-        image(sound, postLeftX-20, postH-50);
-    if(actualPostRight.commentsLoaded)
-        image(sound, postRightX-20, postH-50);
+
+    // Icons
+    image(compare, midX, midY+20);
+
+    fill('#F27D74');
+    noStroke();
+    ellipse(postLeftX, postH+172, 70, 70);
+    ellipse(postRightX, postH+172, 70, 70);
+    image(sound, postLeftX+4, postH+172);
+    image(sound, postRightX+4, postH+172);
+
 
     // draw POST-CONTENT
     fill(colorLight);
@@ -194,7 +199,7 @@ function showPosts() {
     textSize(20);
     textFont(BebasNeue);
     text("Score: " + score, scoreX, scoreY);
-    image(scoreImg, scoreX-60, scoreY-20,30,35);
+    image(scoreImg, scoreX-50, scoreY-3,35,35);
 
     // handle clicks on post & change gameState
     if(mouseIsPressed){
@@ -230,7 +235,7 @@ function showResults() {
     let headerY = 0.1 * height;
 
     let postW = 9 * col;
-    let postH = 0.35 * height;
+    let postH = 0.2 * height;
     let postLeftX = midX - 6*col;
     let postRightX = midX + 6*col;
     let postY = 0.42 * height;
@@ -281,8 +286,8 @@ function showResults() {
     textStyle(BOLD);
     text(actualPostLeft.ups, postLeftX, postY, postW, postH);
     text(actualPostRight.ups, postRightX, postY, postW, postH);
-    image(upward, postLeftX-110, postH+3,60, 60);
-    image(upward, postRightX-110, postH+3,60, 60);
+    image(upward, postLeftX-80, postH+110,60, 60);
+    image(upward, postRightX-80, postH+110,60, 60);
 
     // draw DOTS
     for(let i = 0; i < numShowcasePosts; i++){
@@ -359,7 +364,7 @@ function showResults() {
     textSize(20);
     textFont(BebasNeue);
     text("Score: " + score, scoreX, scoreY);
-    image(scoreImg, scoreX-60, scoreY-20,30,35);
+    image(scoreImg, scoreX-50, scoreY-3,35,35);
 
 
     // draw NEXT-BUTTON
