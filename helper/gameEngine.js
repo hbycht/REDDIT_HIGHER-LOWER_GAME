@@ -30,22 +30,20 @@ let startPost;
 
 let colorBackground;
 let colorPosts;
-let colorHigher;
-let colorLower;
 let colorLeft;
 let colorRight;
 let colorButton;
 let colorDot;
 let colorLight;
 
-let colorHigherHover;
-let colorLowerHover;
+let colorHigher;
+let colorLower;
 let colorPostsHover;
 let colorLeftHover;
 let colorRightHover;
 let colorButtonHover;
 
-
+let timer = 0;
 let score = 0;
 
 function setupGame(){
@@ -56,17 +54,15 @@ function setupGame(){
 
     // set some color variables
     colorBackground = color("#09161a");
-    colorHigher = color("#137250");
-    colorLower = color("#651124");
-    colorPosts = color("#0f5b7c");
+    colorPosts = color("#061c50");
     colorLight = color("#ffffff");
     colorButton = color("#F27D74");
     colorDotFrom = color("#71a9bd");
     colorDotTo = color("#F24B3F");
 
-    colorHigherHover = color("#00eca6");
-    colorLowerHover = color("#e82d5d");
-    colorPostsHover = color("#29596b");
+    colorHigher = color("#00eca6");
+    colorLower = color("#e82d5d");
+    colorPostsHover = color("#0e389b");
     colorButtonHover = color("#d95148");
 
 
@@ -76,38 +72,7 @@ function setupGame(){
 }
 
 function drawGame(){
-
-//     fill(100, 100, 100, 100);
-//     text("Which Post has more likes?", midX, midY - 100);
-// //score
-//     fill(100, 100, 100, 100);
-//     text("Score: " + score, midX + 250, midY - 100);
-//
-// //Richtig oder Falsch
-//     fill(100, 100, 100, 100);
-//     text(richtigoderfalsch, midX, midY + 300);
-//
-//     fill(50, 50, 50, 100);
-//     text(subreddits[startReddit].posts[startPost].title, midX, midY);
-//     //text(subreddits[startReddit].title, midX + 10, midY);
-//
-//     fill(50, 50, 50, alphaUps);
-//     text(subreddits[startReddit].posts[startPost].ups, midX, midY + 10);
-//     text(subreddits[startReddit].name, midX, midY - 20);
-//
-//     fill(50, 50, 50, 100)
-//     text(subreddits[randomSubreddit].posts[randomPost].title, midX, midY + 50);
-//     //text(subreddits[randomSubreddit].title, midX +10, midY + 50);
-//
-//     fill(50, 50, 50, 0);
-//     text(subreddits[randomSubreddit].posts[randomPost].ups, midX, midY + 60);
-//     fill(50, 50, 50, 100);
-//     text(subreddits[randomSubreddit].name, midX, midY + 70);
-//
-//     buttonAnswer1.mousePressed(onclickhigher)
-//     buttonAnswer2.mousePressed(onclicklower)
-//     //buttonAnswer3.mousePressed(testebutton)
-
+    manageGameState();
 }
 
 function hoverRect(rectX, rectY, rectW, rectH) {
@@ -145,31 +110,65 @@ function loadNextRound() {
 // Game state: Question
 function showPosts() {
 
-    stroke(100);
-    line(midX, 0, midX, height);
-    noStroke();
+    let headerY = 0.1 * height;
 
-    let rectWidth = 400;
-    let rectHeight = 500;
-    let postLeftX = midX - rectWidth - 100;
-    let postRightX = midX + 100;
-    let postY = midY - 200;
+    let postW = 10 * col;
+    let postH = 0.5 * height;
+    let postLeftX = midX - 5.5*col;
+    let postRightX = midX + 5.5*col;
+    let postY = 0.6 * height;
+    let postCorner = 6;
 
-    // left post
-    fill(200, 100, 100, 50);
-    rectMode(CORNER);
-    rect(postLeftX, postY, rectWidth, rectHeight);
-    textAlign(RIGHT, TOP);
-    fill(100, 100, 100, 100);
-    text(actualPostLeft.title,postLeftX + 50, postY +100 , 300, 600);
+    let scoreX = midX;
+    let scoreY = height * 0.95;
 
-    // right post
-    fill(20, 100, 100, 50);
-    rectMode(CORNER);
-    rect(postRightX, postY, rectWidth, rectHeight);
-    textAlign(LEFT, TOP);
-    fill(100, 100, 100, 100);
-    text(actualPostRight.title, postRightX + 50, postY +100, 300, 600);
+    textAlign(CENTER, CENTER);
+    rectMode(CENTER);
+
+    // draw HEAD-LINE + NAME + numFollows
+    textSize(48);
+    fill(colorLight);
+    text("Which post has more upvotes?", midX, headerY);
+    textSize(34);
+    fill(colorButton);
+    text("r/" + actualSubreddit.name, midX, headerY + 60);
+    textSize(20);
+    fill(colorButtonHover);
+    text(actualSubreddit.numFollows + " Follower", midX, headerY + 95);
+
+    // draw POSTS
+    fill(hoverRect(postLeftX, postY, postW, postH) ? colorPostsHover : colorPosts);
+    rect(postLeftX, postY, hoverRect(postLeftX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
+    fill(hoverRect(postRightX, postY, postW, postH) ? colorPostsHover : colorPosts);
+    rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
+
+    // draw POST-CONTENT
+    fill(colorLight);
+    textSize(20);
+    textStyle(BOLD);
+    text(actualPostLeft.title, postLeftX, postY, postW * 0.8, postH);
+    text(actualPostRight.title, postRightX, postY, postW * 0.8, postH);
+
+    // draw SCORE
+    fill(colorHigher);
+    textStyle(BOLD);
+    textSize(20);
+    text("Score: " + score, scoreX, scoreY);
+
+    // handle clicks on post & change gameState
+    if(mouseIsPressed){
+        // on LEFT post
+        if(hoverRect(postLeftX, postY, postW, postH)){
+            timer = 1;
+            loadNextRound();
+        }
+        // on RIGHT post
+        else if(hoverRect(postRightX, postY, postW, postH)) {
+            timer = 1;
+            loadNextRound();
+        }
+    }
+
 }
 
 // Game state: Answer
@@ -198,16 +197,18 @@ function showResults() {
     let scoreY = height * 0.95;
 
     textAlign(CENTER, CENTER);
+    rectMode(CENTER);
 
     // Check which post has more ups
     if(actualPostLeft.ups < actualPostRight.ups){
-        colorLeft = hoverRect(postLeftX, postY, postW, postH) ? colorLowerHover : colorLower;
-        colorRight = hoverRect(postRightX, postY, postW, postH) ? colorHigherHover : colorHigher;
+        colorLeft = colorLower;
+        colorRight = colorHigher;
     } else {
-        colorLeft = hoverRect(postLeftX, postY, postW, postH) ? colorHigherHover : colorHigher;
-        colorRight = hoverRect(postRightX, postY, postW, postH) ? colorLowerHover : colorLower;
+        colorLeft = colorHigher;
+        colorRight = colorLower;
     }
 
+    // draw NAME + numFollows
     textSize(42);
     fill(colorButton);
     text("r/" + actualSubreddit.name, midX, headerY);
@@ -215,13 +216,13 @@ function showResults() {
     fill(colorButtonHover);
     text(actualSubreddit.numFollows + " Follower", midX, headerY + 40);
 
-    rectMode(CENTER);
+
 
     // draw POSTS
     fill(colorLeft);
-    rect(postLeftX, postY, hoverRect(postLeftX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
+    rect(postLeftX, postY, postW, postH, postCorner);
     fill(colorRight);
-    rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
+    rect(postRightX, postY, postW, postH, postCorner);
 
     // draw POST-CONTENT
     fill(colorLight);
@@ -271,10 +272,10 @@ function showResults() {
             noStroke();
             rect(x, y + diameter / 2.0, diameter * 1.6, diameter / 1.0);
             // draw the dot in hover color
-            fill(colorHigherHover);
+            fill(colorHigher);
             ellipse(x, y, diameter * 1.1);
             // draw post content field
-            fill(colorHigherHover);
+            fill(colorHigher);
             stroke(colorButton);
             strokeWeight(5);
             rect(midX, postY, 18 * col, postH * 0.7, postCorner * 2);
@@ -298,7 +299,7 @@ function showResults() {
     }
 
     // draw SCORE
-    fill(colorHigherHover);
+    fill(colorHigher);
     textStyle(BOLD);
     textSize(20);
     text("Score: " + score, scoreX, scoreY);
@@ -310,15 +311,20 @@ function showResults() {
     textStyle(BOLD);
     textSize(50);
     text("next", buttonX, buttonY);
+
+    // handle NEXT-BUTTON click
+    if(hoverRect(buttonX, buttonY, buttonW, buttonH) && mouseIsPressed) {
+        timer = 0;
+
+    }
+
 }
 
-function manageGameState(timer){
-
+function manageGameState(){
     if(timer < 1){
         showPosts();
 
     }else if(timer === 1){
         showResults();
-
     }
 }

@@ -43,16 +43,6 @@ function formatData(d){
             });
         }
 
-        // Find data range (min & max)
-        let tempData = [];
-        subreddits.forEach(sub => {
-            sub.posts.forEach(post => {
-                tempData.push(post.ups);
-            });
-        });
-
-        dataMax = max(tempData);
-
         console.log("New subreddit loaded.");
         console.log("data range: " + dataMin + " - " + dataMax);
     } else {
