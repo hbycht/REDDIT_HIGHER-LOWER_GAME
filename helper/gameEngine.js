@@ -133,16 +133,19 @@ function showPosts() {
     textSize(34);
     fill(colorButton);
     textFont(OswaldMedium);
-    text("r/" + actualSubreddit.name, midX, headerY + 60);
+    text("r/" + actualSubreddit.name, midX, headerY + 50);
     textSize(20);
     fill(colorButtonHover);
-    text(actualSubreddit.numFollows + " Members", midX, headerY + 95);
+    text(actualSubreddit.numFollows + " Members", midX, headerY + 85);
 
     // draw POSTS
     fill(hoverRect(postLeftX, postY, postW, postH) ? colorPostsHover : colorPosts);
     rect(postLeftX, postY, hoverRect(postLeftX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
     fill(hoverRect(postRightX, postY, postW, postH) ? colorPostsHover : colorPosts);
     rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
+    image(compare, midX-48, midY);
+    image(sound, postLeftX-20, postH-50);
+    image(sound, postRightX-20, postH-50);
 
     // draw POST-CONTENT
     fill(colorLight);
@@ -155,7 +158,9 @@ function showPosts() {
     fill(colorHigher);
     textStyle(BOLD);
     textSize(20);
+    textFont(BebasNeue);
     text("Score: " + score, scoreX, scoreY);
+    image(scoreImg, scoreX-60, scoreY-20,30,35);
 
     // handle clicks on post & change gameState
     if(mouseIsPressed){
@@ -167,7 +172,7 @@ function showPosts() {
                 score = 0
             }
             timer = 1;
-            loadNextRound();
+            //loadNextRound();
         }
         // on RIGHT post
         else if(hoverRect(postRightX, postY, postW, postH)) {
@@ -177,9 +182,10 @@ function showPosts() {
                 score = 0
             }
             timer = 1;
-            loadNextRound();
+            //loadNextRound();
         }
     }
+    console.log(actualPostRight.ups);
 }
 
 // Game state: Answer
@@ -235,12 +241,15 @@ function showResults() {
     fill(colorRight);
     rect(postRightX, postY, postW, postH, postCorner);
 
+
     // draw POST-CONTENT
     fill(colorLight);
     textSize(30);
     textStyle(BOLD);
     text(actualPostLeft.ups, postLeftX, postY, postW, postH);
     text(actualPostRight.ups, postRightX, postY, postW, postH);
+    image(upward, postLeftX-110, postH+3,60, 60);
+    image(upward, postRightX-110, postH+3,60, 60);
 
     // draw DOTS
     for(let i = 0; i < numShowcasePosts; i++){
@@ -297,6 +306,7 @@ function showResults() {
             let upText = actualSubreddit.posts[i].ups + " upvotes";
             rect(midX, postY - postH * 0.35, textWidth(upText) + 40, 50, postCorner * 2);
             noStroke();
+
             // show num upvotes
             fill(colorBackground);
             text(upText, midX, postY - postH * 0.35);
@@ -304,6 +314,7 @@ function showResults() {
             textSize(20);
             textStyle(BOLD)
             text(actualSubreddit.posts[i].title, midX, postY, 16 * col, postH * 0.5);
+
         } else {
             hoverDot = false;
         }
@@ -313,18 +324,23 @@ function showResults() {
     fill(colorHigher);
     textStyle(BOLD);
     textSize(20);
+    textFont(BebasNeue);
     text("Score: " + score, scoreX, scoreY);
+    image(scoreImg, scoreX-60, scoreY-20,30,35);
+
 
     // draw NEXT-BUTTON
     fill(hoverRect(buttonX, buttonY, buttonW, buttonH) ? colorButtonHover : colorButton);
-    rect(buttonX, buttonY, buttonW, buttonH, postCorner);
+    rect(buttonX, buttonY+18, buttonW, buttonH, postCorner);
     fill(colorLight);
     textStyle(BOLD);
-    textSize(50);
-    text("next", buttonX, buttonY);
+    textSize(40);
+    textFont(OswaldMedium);
+    text("next subreddit", buttonX, buttonY+6);
 
     // handle NEXT-BUTTON click
     if(hoverRect(buttonX, buttonY, buttonW, buttonH) && mouseIsPressed) {
+        loadNextRound();
         timer = 0;
 
     }
