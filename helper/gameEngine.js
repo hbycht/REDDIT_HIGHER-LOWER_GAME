@@ -206,7 +206,7 @@ function showResults() {
     let headerY = 0.1 * height;
 
     let postW = 9 * col;
-    let postH = 0.35 * height;
+    let postH = 0.2 * height;
     let postLeftX = midX - 6*col;
     let postRightX = midX + 6*col;
     let postY = 0.42 * height;
@@ -257,8 +257,8 @@ function showResults() {
     textStyle(BOLD);
     text(actualPostLeft.ups, postLeftX, postY, postW, postH);
     text(actualPostRight.ups, postRightX, postY, postW, postH);
-    image(upward, postLeftX-80, postH+33,60, 60);
-    image(upward, postRightX-80, postH+33,60, 60);
+    image(upward, postLeftX-80, postH+110,60, 60);
+    image(upward, postRightX-80, postH+110,60, 60);
 
     // draw DOTS
     for(let i = 0; i < numShowcasePosts; i++){
