@@ -6,6 +6,7 @@ let sound;
 let compare;
 let scoreImg;
 let upward;
+let muted;
 
 //*** PRELOAD */
 function preload() {
@@ -24,6 +25,7 @@ function preload() {
     compare = loadImage('assets/Images/outline_compare_arrows_white_48dp.png');
     scoreImg = loadImage('assets/Images/sports_score_white_48dp.svg');
     upward = loadImage('assets/Images/outline_arrow_upward_white_48dp.png');
+    muted = loadImage('assets/Images/Mute.png');
 
 }
 
