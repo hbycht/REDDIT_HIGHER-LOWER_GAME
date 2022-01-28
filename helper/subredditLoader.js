@@ -2,31 +2,32 @@
 
 // list of subreddit names
 let listOfSubredditNames = [
-    "askReddit",
-    "AMA",
-    "askWomen",
-    "askScience",
-    "lotr",
-    "biology",
-    "Awwducational",
-    "physics",
-    "chemistry",
-    "nasa",
-    "spacex",
-    "space",
-    "jobs",
-    "workonline",
-    "coding",
-    "dailyprogrammer",
-    "java",
-    "LSD",
-    "shrooms",
-    "dmt",
-    "running",
-    "woahdude",
-    "glitchinthematrix",
-    "poetry",
-    "lovecraft",
+    // "askReddit",
+    // "AMA",
+    // "askWomen",
+    // "askScience",
+    // "lotr",
+    // "biology",
+    // "Awwducational",
+    // "physics",
+    // "chemistry",
+    // "nasa",
+    // "spacex",
+    // "space",
+    // "jobs",
+    // "workonline",
+    // "coding",
+    // "dailyprogrammer",
+    // "java",
+    // "LSD",
+    // "shrooms",
+    // "dmt",
+    // "running",
+    // "woahdude",
+    // "glitchinthematrix",
+    // "poetry",
+    // "lovecraft",
+    "memes"
 ]
 
 // list of all subreddits
@@ -97,10 +98,13 @@ function formatPosts(d){
                 "commentsLoaded": false,
                 "post_hint": d.data.children[i].data.post_hint,
                 "selftext": d.data.children[i].data.selftext,
-                // "pic": loadImage(d.data.children[i].data.url),
+                // "pic": createImg(d.data.children[i].data.url, "Post Image"),
                 "pic_url": d.data.children[i].data.url,
             });
         }
+
+
+
 
         subreddits[currentSubredditIndex].posts = shuffle(tempPosts);
 

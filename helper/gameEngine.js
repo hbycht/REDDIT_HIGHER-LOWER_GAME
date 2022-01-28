@@ -39,6 +39,9 @@ let colorLeftHover;
 let colorRightHover;
 let colorButtonHover;
 
+let picLeftLoaded = false;
+let picRightLoaded = false;
+
 let timer = 0;
 let score = 0;
 
@@ -108,6 +111,8 @@ function loadNextRound() {
 // Game state: Question
 function showPosts() {
 
+    imageMode(CENTER);
+
     // Load comments
     if(!isLoadingComments) {
         if (!actualPostLeft.commentsLoaded) {
@@ -168,6 +173,20 @@ function showPosts() {
     textStyle(BOLD);
     text('"' + actualPostLeft.title + '"', postLeftX, postY, postW * 0.8, postH);
     text('"' + actualPostRight.title + '"', postRightX, postY, postW * 0.8, postH);
+
+    // draw Pics
+    if(actualPostLeft.post_hint == "image" && !picLeftLoaded){
+        let imgLeft = createImg(actualPostLeft.pic_url);
+        imgLeft.position(postLeftX, postY);
+        imgLeft.size(postW, postH);
+        picLeftLoaded = true;
+    }
+    if(actualPostRight.post_hint == "image" && !picRightLoaded){
+        let imgRight = createImg(actualPostRight.pic_url);
+        imgRight.position(postRightX, postY);
+        imgRight.size(postW, postH);
+        picRightLoaded = true;
+    }
 
     // draw SCORE
     fill(colorHigher);
@@ -356,6 +375,8 @@ function showResults() {
     if(hoverRect(buttonX, buttonY, buttonW, buttonH) && mouseIsPressed) {
         loadNextRound();
         timer = 0;
+        picLeftLoaded = false;
+        picRightLoaded = false;
 
     }
 

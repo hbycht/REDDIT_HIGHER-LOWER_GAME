@@ -13,7 +13,7 @@ function preload() {
     //* Load all subreddits in setup with loadSubreddit(subreddit)
 
     // ** Load all reddit .json (You can add even more; maybe it gets a bit overloaded) **//
-    loadSubreddit("Showerthoughts");
+    loadSubreddit("memes");
 
     // Fonts
     BebasNeue = loadFont('assets/Fonts/BebasNeue-Regular.ttf');
