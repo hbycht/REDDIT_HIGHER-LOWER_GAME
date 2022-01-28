@@ -1,5 +1,6 @@
 body {
-    background: linear-gradient(0.25turn, hsl(221, 96%, 21%), hsl(41, 92%, 76%), hsl(180, 63%, 31%));
+    /*background: linear-gradient(0.25turn, hsl(221, 96%, 21%), hsl(41, 92%, 76%), hsl(180, 63%, 31%));*/
+    background: linear-gradient(0.25turn, #d9a96b, #144c64, #913544);
     color: #ffe7b3;
 }
 
@@ -9,7 +10,7 @@ main {
     height: max-content;
     
 
-    margin: 7% 10% 0% 10%;
+    margin: 5% 5% 0% 5%;
     padding: 0;
     position: relative;
     top: 0%;

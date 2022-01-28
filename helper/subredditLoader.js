@@ -1,8 +1,5 @@
 /// <reference path="../TSDef/p5.global-mode.d.ts" />
 
-let dataMin = 1;
-let dataMax;
-
 // list of subreddit names
 let listOfSubredditNames = [
     "askReddit",
@@ -69,9 +66,11 @@ function formatPosts(d){
         subreddits[currentSubredditIndex].name = d.data.children[0].data.subreddit;
         subreddits[currentSubredditIndex].numFollows = d.data.children[0].data.subreddit_subscribers;
 
+        let tempPosts = [];
+
         // Push important post data into an array
         for (let i = 0; i < d.data.children.length; i++) {
-            subreddits[currentSubredditIndex].posts.push({
+            tempPosts.push({
                 "id": i,
                 "title": d.data.children[i].data.title,
                 "url": "https://www.reddit.com/" + d.data.children[i].data.permalink,
@@ -82,14 +81,7 @@ function formatPosts(d){
             });
         }
 
-        // Find data range (min & max)
-        let tempData = [];
-        subreddits.forEach(sub => {
-            sub.posts.forEach(post => {
-                tempData.push(post.ups);
-            });
-        });
-        dataMax = max(tempData);
+        subreddits[currentSubredditIndex].posts = shuffle(tempPosts);
 
         console.log("New subreddit loaded.");
 
