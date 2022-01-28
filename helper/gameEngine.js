@@ -128,13 +128,15 @@ function showPosts() {
     // draw HEAD-LINE + NAME + numFollows
     textSize(48);
     fill(colorLight);
+    textFont(BebasNeue);
     text("Which post has more upvotes?", midX, headerY);
     textSize(34);
     fill(colorButton);
+    textFont(OswaldMedium);
     text("r/" + actualSubreddit.name, midX, headerY + 60);
     textSize(20);
     fill(colorButtonHover);
-    text(actualSubreddit.numFollows + " Follower", midX, headerY + 95);
+    text(actualSubreddit.numFollows + " Members", midX, headerY + 95);
 
     // draw POSTS
     fill(hoverRect(postLeftX, postY, postW, postH) ? colorPostsHover : colorPosts);
@@ -146,8 +148,8 @@ function showPosts() {
     fill(colorLight);
     textSize(20);
     textStyle(BOLD);
-    text(actualPostLeft.title, postLeftX, postY, postW * 0.8, postH);
-    text(actualPostRight.title, postRightX, postY, postW * 0.8, postH);
+    text('"' + actualPostLeft.title + '"', postLeftX, postY, postW * 0.8, postH);
+    text('"' + actualPostRight.title + '"', postRightX, postY, postW * 0.8, postH);
 
     // draw SCORE
     fill(colorHigher);
@@ -279,7 +281,7 @@ function showResults() {
             fill(colorBackground);
             ellipse(x, y, diameter * 1.3);
             noStroke();
-            rect(x, y + diameter / 2.0, diameter * 1.6, diameter / 1.0);
+            rect(x, y + diameter / 2.0, diameter * 1.6, diameter);
             // draw the dot in hover color
             fill(colorHigher);
             ellipse(x, y, diameter * 1.1);

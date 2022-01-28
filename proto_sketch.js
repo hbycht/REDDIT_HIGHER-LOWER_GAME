@@ -1,5 +1,10 @@
 /// <reference path="./TSDef/p5.global-mode.d.ts" />
 
+let DongleRegular;
+let BebasNeue;
+let OswaldMedium;
+let like;
+let sound;
 
 //*** PRELOAD */
 function preload() {
@@ -9,8 +14,14 @@ function preload() {
     // ** Load all reddit .json (You can add even more; maybe it gets a bit overloaded) **//
     loadSubreddit("Showerthoughts");
 
+    // Fonts
+    DongleRegular = loadFont('assets/Fonts/Dongle-Regular.ttf');
+    BebasNeue = loadFont('assets/Fonts/BebasNeue-Regular.ttf');
+    OswaldMedium = loadFont('assets/Fonts/Oswald-Medium.ttf');
 
-
+    // Images
+    like= loadImage('assets/Images/like.png');
+    sound= loadImage('assets/Images/sound.svg');
 }
 
 //*** SETUP */
