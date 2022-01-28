@@ -25,9 +25,9 @@ let drawingParams = {
 
   numParticles: 1500,
 
-  particleColorBegin: 0,
+  particleColorBegin: 345,
   
-  particleColorEnd: 70,
+  particleColorEnd: 345,
 
   background: 5,
 
@@ -78,7 +78,7 @@ function initParticles() {
     var y = random(height);
 
     particles.push({
-      col: random(drawingParams.particleColorBegin, drawingParams.particleColorEnd),
+      col: drawingParams.particleColorBegin,
       xPos: x,
       yPos: y,
       preX: x,
@@ -130,7 +130,7 @@ function drawParticle(p, forces) {
 
     let randomScale = random(1 / 2, 2);
 
-    p.col = random(drawingParams.particleColorBegin, drawingParams.particleColorEnd);
+    p.col = drawingParams.particleColorBegin;
     p.preX = p.xPos;
     p.preY = p.yPos;
     p.rot = null;
