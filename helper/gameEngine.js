@@ -24,10 +24,6 @@ let col; // Unterteilung der Sketchfläche in 12 Spaltenbreiten (siehe setupGame
 let actualPostLeft = {};
 let actualPostRight = {};
 
-let randomPost;
-let startReddit;
-let startPost;
-
 let colorBackground;
 let colorPosts;
 let colorLeft;
@@ -45,6 +41,8 @@ let colorButtonHover;
 
 let timer = 0;
 let score = 0;
+
+let logSwitch = false;
 
 function setupGame(){
 
@@ -86,7 +84,7 @@ function hoverCircle(circleX, circleY, diameter) {
 // load next subreddit into temp
 function loadNextRound() {
     actualSubreddit = nextSubreddit;
-    nextSubreddit = random(subreddits);
+    nextSubreddit = subreddits[subreddits.length - 1];
 
     // Find data range of actual subreddit (min & max)
     let tempData = [];
@@ -109,6 +107,20 @@ function loadNextRound() {
 
 // Game state: Question
 function showPosts() {
+
+    // Load comments
+    if(!isLoadingComments) {
+        if (!actualPostLeft.commentsLoaded) {
+            loadComments(actualPostLeft);
+        }
+        else if (!actualPostRight.commentsLoaded) {
+            loadComments(actualPostRight);
+        } else if(!logSwitch) {
+            console.log(actualPostLeft.comments);
+            console.log(actualPostRight.comments);
+            logSwitch = true;
+        }
+    }
 
     let headerY = 0.1 * height;
 
@@ -144,8 +156,11 @@ function showPosts() {
     fill(hoverRect(postRightX, postY, postW, postH) ? colorPostsHover : colorPosts);
     rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
     image(compare, midX-48, midY);
-    image(sound, postLeftX-20, postH-50);
-    image(sound, postRightX-20, postH-50);
+    // audioComments just if comments are loaded
+    if(actualPostLeft.commentsLoaded)
+        image(sound, postLeftX-20, postH-50);
+    if(actualPostRight.commentsLoaded)
+        image(sound, postRightX-20, postH-50);
 
     // draw POST-CONTENT
     fill(colorLight);
@@ -185,7 +200,6 @@ function showPosts() {
             //loadNextRound();
         }
     }
-    console.log(actualPostRight.ups);
 }
 
 // Game state: Answer
