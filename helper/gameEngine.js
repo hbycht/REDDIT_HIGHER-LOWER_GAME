@@ -247,6 +247,8 @@ function showResults() {
     textStyle(BOLD);
     text(actualPostLeft.ups, postLeftX, postY, postW, postH);
     text(actualPostRight.ups, postRightX, postY, postW, postH);
+    image(upward, postLeftX-110, postH+3,60, 60);
+    image(upward, postRightX-110, postH+3,60, 60);
 
     // draw DOTS
     for(let i = 0; i < numShowcasePosts; i++){
@@ -303,6 +305,7 @@ function showResults() {
             let upText = actualSubreddit.posts[i].ups + " upvotes";
             rect(midX, postY - postH * 0.35, textWidth(upText) + 40, 50, postCorner * 2);
             noStroke();
+
             // show num upvotes
             fill(colorBackground);
             text(upText, midX, postY - postH * 0.35);
@@ -310,6 +313,7 @@ function showResults() {
             textSize(20);
             textStyle(BOLD)
             text(actualSubreddit.posts[i].title, midX, postY, 16 * col, postH * 0.5);
+
         } else {
             hoverDot = false;
         }
@@ -329,9 +333,9 @@ function showResults() {
     rect(buttonX, buttonY+18, buttonW, buttonH, postCorner);
     fill(colorLight);
     textStyle(BOLD);
-    textSize(50);
+    textSize(40);
     textFont(OswaldMedium);
-    text("next subreddit", buttonX, buttonY+4);
+    text("next subreddit", buttonX, buttonY+6);
 
     // handle NEXT-BUTTON click
     if(hoverRect(buttonX, buttonY, buttonW, buttonH) && mouseIsPressed) {

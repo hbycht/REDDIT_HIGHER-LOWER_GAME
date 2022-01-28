@@ -5,6 +5,7 @@ let OswaldMedium;
 let sound;
 let compare;
 let scoreImg;
+let upward;
 
 //*** PRELOAD */
 function preload() {
@@ -22,6 +23,7 @@ function preload() {
     sound= loadImage('assets/Images/sound.svg');
     compare = loadImage('assets/Images/outline_compare_arrows_white_48dp.png');
     scoreImg = loadImage('assets/Images/sports_score_white_48dp.svg');
+    upward = loadImage('assets/Images/outline_arrow_upward_white_48dp.png');
 
 }
 
