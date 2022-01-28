@@ -172,7 +172,7 @@ function showPosts() {
                 score = 0
             }
             timer = 1;
-            loadNextRound();
+            //loadNextRound();
         }
         // on RIGHT post
         else if(hoverRect(postRightX, postY, postW, postH)) {
@@ -182,9 +182,10 @@ function showPosts() {
                 score = 0
             }
             timer = 1;
-            loadNextRound();
+            //loadNextRound();
         }
     }
+    console.log(actualPostRight.ups);
 }
 
 // Game state: Answer
@@ -339,6 +340,7 @@ function showResults() {
 
     // handle NEXT-BUTTON click
     if(hoverRect(buttonX, buttonY, buttonW, buttonH) && mouseIsPressed) {
+        loadNextRound();
         timer = 0;
 
     }
