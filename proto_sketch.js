@@ -1,10 +1,10 @@
 /// <reference path="./TSDef/p5.global-mode.d.ts" />
 
-let DongleRegular;
 let BebasNeue;
 let OswaldMedium;
-let like;
 let sound;
+let compare;
+let scoreImg;
 
 //*** PRELOAD */
 function preload() {
@@ -15,13 +15,14 @@ function preload() {
     loadSubreddit("Showerthoughts");
 
     // Fonts
-    DongleRegular = loadFont('assets/Fonts/Dongle-Regular.ttf');
     BebasNeue = loadFont('assets/Fonts/BebasNeue-Regular.ttf');
     OswaldMedium = loadFont('assets/Fonts/Oswald-Medium.ttf');
 
     // Images
-    like= loadImage('assets/Images/like.png');
     sound= loadImage('assets/Images/sound.svg');
+    compare = loadImage('assets/Images/outline_compare_arrows_white_48dp.png');
+    scoreImg = loadImage('assets/Images/sports_score_white_48dp.svg');
+
 }
 
 //*** SETUP */

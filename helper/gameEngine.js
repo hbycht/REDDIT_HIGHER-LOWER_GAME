@@ -133,16 +133,19 @@ function showPosts() {
     textSize(34);
     fill(colorButton);
     textFont(OswaldMedium);
-    text("r/" + actualSubreddit.name, midX, headerY + 60);
+    text("r/" + actualSubreddit.name, midX, headerY + 50);
     textSize(20);
     fill(colorButtonHover);
-    text(actualSubreddit.numFollows + " Members", midX, headerY + 95);
+    text(actualSubreddit.numFollows + " Members", midX, headerY + 85);
 
     // draw POSTS
     fill(hoverRect(postLeftX, postY, postW, postH) ? colorPostsHover : colorPosts);
     rect(postLeftX, postY, hoverRect(postLeftX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
     fill(hoverRect(postRightX, postY, postW, postH) ? colorPostsHover : colorPosts);
     rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
+    image(compare, midX-48, midY);
+    image(sound, postLeftX-20, postH-50);
+    image(sound, postRightX-20, postH-50);
 
     // draw POST-CONTENT
     fill(colorLight);
@@ -155,7 +158,9 @@ function showPosts() {
     fill(colorHigher);
     textStyle(BOLD);
     textSize(20);
+    textFont(BebasNeue);
     text("Score: " + score, scoreX, scoreY);
+    image(scoreImg, scoreX-60, scoreY-20,30,35);
 
     // handle clicks on post & change gameState
     if(mouseIsPressed){
@@ -225,6 +230,7 @@ function showResults() {
     rect(postLeftX, postY, postW, postH, postCorner);
     fill(colorRight);
     rect(postRightX, postY, postW, postH, postCorner);
+
 
     // draw POST-CONTENT
     fill(colorLight);
@@ -304,15 +310,19 @@ function showResults() {
     fill(colorHigher);
     textStyle(BOLD);
     textSize(20);
+    textFont(BebasNeue);
     text("Score: " + score, scoreX, scoreY);
+    image(scoreImg, scoreX-60, scoreY-20,30,35);
+
 
     // draw NEXT-BUTTON
     fill(hoverRect(buttonX, buttonY, buttonW, buttonH) ? colorButtonHover : colorButton);
-    rect(buttonX, buttonY, buttonW, buttonH, postCorner);
+    rect(buttonX, buttonY+18, buttonW, buttonH, postCorner);
     fill(colorLight);
     textStyle(BOLD);
     textSize(50);
-    text("next", buttonX, buttonY);
+    textFont(OswaldMedium);
+    text("next subreddit", buttonX, buttonY+4);
 
     // handle NEXT-BUTTON click
     if(hoverRect(buttonX, buttonY, buttonW, buttonH) && mouseIsPressed) {
