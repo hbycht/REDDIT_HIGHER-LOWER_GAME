@@ -159,16 +159,25 @@ function showPosts() {
     if(mouseIsPressed){
         // on LEFT post
         if(hoverRect(postLeftX, postY, postW, postH)){
+            if(actualPostLeft.ups > actualPostRight.ups){
+                score++
+            }else {
+                score = 0
+            }
             timer = 1;
             loadNextRound();
         }
         // on RIGHT post
         else if(hoverRect(postRightX, postY, postW, postH)) {
+            if(actualPostRight.ups > actualPostLeft.ups){
+                score++
+            }else {
+                score = 0
+            }
             timer = 1;
             loadNextRound();
         }
     }
-
 }
 
 // Game state: Answer
