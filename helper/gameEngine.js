@@ -86,7 +86,7 @@ function hoverCircle(circleX, circleY, diameter) {
 // load next subreddit into temp
 function loadNextRound() {
     actualSubreddit = nextSubreddit;
-    nextSubreddit = subreddits[subreddits.length - 1];
+    nextSubreddit = random(subreddits);
 
     // Find data range of actual subreddit (min & max)
     let tempData = [];
@@ -103,7 +103,7 @@ function loadNextRound() {
     actualPostRight = random(actualSubreddit.posts);
 
     // delete first subreddit; we don't need it anymore
-    subreddits.shift();
+    //subreddits.shift();
 
 }
 
