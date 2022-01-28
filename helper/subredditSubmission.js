@@ -22,10 +22,13 @@ function initSubmitGUI() {
     
     // Display
     subredditSubmissionText.position(20, -5);
+    // subredditSubmissionText.style("position", "relative");
     subredditSubmissionText.style("color", "#ffe7b3");
     subredditSubmissionInput.id("subredditSubmission");
     subredditSubmissionInput.position(20, 48);
     subredditSubmissionButton.position(subredditSubmissionInput.x + subredditSubmissionInput.width, subredditSubmissionInput.y);
+    subredditSubmissionButton.id("submissionButton");
+    // document.getElementById("submissionButton").onSubmit = addSubreddit;
 
     // Event-listener for button pressed
     subredditSubmissionButton.mousePressed(addSubreddit);

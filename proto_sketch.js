@@ -32,6 +32,9 @@ function preload() {
 //*** SETUP */
 function setup() {
 
+    frameRate(30);
+
+
     // GUI to add subreddits
     initSubmitGUI();
 
@@ -40,9 +43,14 @@ function setup() {
 
     // Some general settings
     colorMode(HSB, 360, 100, 100, 100);
+    noStroke();
     textAlign(CENTER, CENTER);
     angleMode(DEGREES);
 
+    angleMode(DEGREES);
+    smooth();
+
+    initParticles();
     setupGame();
     
     // // Log all subreddits
@@ -66,6 +74,7 @@ function draw() {
 
     // Clean sketch with fresh background
     background(colorBackground);
+    drawFlowfield();
 
     drawGame();
 
