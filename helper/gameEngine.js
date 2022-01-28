@@ -112,10 +112,10 @@ function showPosts() {
 
     let headerY = 0.1 * height;
 
-    let postW = 9 * col;
+    let postW = 10 * col;
     let postH = 0.5 * height;
-    let postLeftX = midX - 6.5*col;
-    let postRightX = midX + 6.5*col;
+    let postLeftX = midX - 5.5*col;
+    let postRightX = midX + 5.5*col;
     let postY = 0.6 * height;
     let postCorner = 6;
 
@@ -143,16 +143,9 @@ function showPosts() {
     rect(postLeftX, postY, hoverRect(postLeftX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
     fill(hoverRect(postRightX, postY, postW, postH) ? colorPostsHover : colorPosts);
     rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
-
-    //Icons
-    image(compare, midX-48, midY,100, 100);
-    fill("#F24B3F");
-    noStroke();
-    ellipse(postLeftX, postH+170, 80);
-    ellipse(postRightX, postH+170, 80);
-    image(sound, postLeftX-21, postH+147);
-    image(sound, postRightX-21, postH+147);
-
+    image(compare, midX-48, midY);
+    image(sound, postLeftX-20, postH-50);
+    image(sound, postRightX-20, postH-50);
 
     // draw POST-CONTENT
     fill(colorLight);
