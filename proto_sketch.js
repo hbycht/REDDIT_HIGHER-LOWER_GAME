@@ -57,6 +57,10 @@ function setup() {
     // print("API data: ");
     // console.log(subreddits);
 
+    // let testB = createButton("test");
+    // testB.position(100, 100);
+    // testB.mousePressed(speakTest);
+
 
 
     // speaker.listVoices();
@@ -78,22 +82,6 @@ function draw() {
 
     drawGame();
 
-
-    //     // Button to hear the comments
-    //     if(subreddits[j].comments.length > 0){
-    //
-    //         // button action
-    //         if(dist(mouseX, mouseY, midX, y - xSpacing - 10) < xSpacing * 0.75) {
-    //             fill(cDotFrom, 100, 100, 100);
-    //             speakKeyword(subreddits[j].comments[floor(random(subreddits[j].comments.length))])
-    //         } else {
-    //             fill(20, 100, 100, 100);
-    //             stopSpeaking();
-    //         }
-    //
-    //         ellipse(midX, y - xSpacing - 10, xSpacing * 1.5);
-    //         text("<--- click to play comments", midX + xSpacing - 5, y - xSpacing - 15);
-    //     }
 
     
 }

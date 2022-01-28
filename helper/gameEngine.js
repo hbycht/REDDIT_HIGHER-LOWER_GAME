@@ -142,7 +142,7 @@ function showPosts() {
     let soundIconDia = 2*col;
 
     let scoreX = midX;
-    let scoreY = height * 0.95;
+    let scoreY = height * 0.92;
 
     textAlign(CENTER, CENTER);
     rectMode(CENTER);
@@ -177,14 +177,14 @@ function showPosts() {
     // draw Pics
     if(actualPostLeft.post_hint == "image" && !picLeftLoaded){
         imgLeft = createImg(actualPostLeft.pic_url);
-        imgLeft.position(postLeftX * 0.55, postY * 0.78);
-        imgLeft.size(postW, postH);
+        imgLeft.position(postLeftX * 1.2, postY * 0.9);
+        imgLeft.size(postW * 0.8, postH * 0.7);
         picLeftLoaded = true;
     }
     if(actualPostRight.post_hint == "image" && !picRightLoaded){
         imgRight = createImg(actualPostRight.pic_url);
-        imgRight.position(postRightX * 0.87, postY * 0.78);
-        imgRight.size(postW, postH);
+        imgRight.position(postRightX * 1.063, postY * 0.9);
+        imgRight.size(postW * 0.8, postH * 0.7);
         picRightLoaded = true;
     }
 
@@ -237,46 +237,45 @@ function showPosts() {
     // draw SCORE
     fill(colorHigher);
     textStyle(BOLD);
-    textSize(20);
+    textSize(30);
     textFont(BebasNeue);
-    text("Score: " + score, scoreX, scoreY);
-    image(scoreImg, scoreX-50, scoreY-3,35,35);
+    text("• Score: " + score + " •", scoreX, scoreY);
+    // image(scoreImg, scoreX-50, scoreY-3,35,35);
 
     // handle clicks on post & change gameState
     if(mouseIsPressed){
         // on LEFT post
         if(hoverRect(postLeftX, postY, postW, postH)){
             if(actualPostLeft.ups > actualPostRight.ups){
-                score++
+                score += 2;
             }else {
-                score = 0
+                score -= 1;
             }
             timer = 1;
             //loadNextRound();
-            if(actualPostLeft.post_hint == "image"){
-                imgLeft.remove();
-                imgRight.remove();
-            }
         }
         // on RIGHT post
         else if(hoverRect(postRightX, postY, postW, postH)) {
             if(actualPostRight.ups > actualPostLeft.ups){
-                score++
+                score += 2;
             }else {
-                score = 0
+                score -= 1;
             }
             timer = 1;
-            //loadNextRound();
-            if(actualPostLeft.post_hint == "image"){
-                imgLeft.remove();
-                imgRight.remove();
-            }
         }
     }
 }
 
 // Game state: Answer
 function showResults() {
+
+    // Delete pics
+    if(actualPostLeft.post_hint == "image"){
+        imgLeft.remove();
+    }
+    if(actualPostLeft.post_hint == "image"){
+        imgRight.remove();
+    }
 
     let numShowcasePosts = 5;
     let xSpacing = width / (numShowcasePosts + 1);
@@ -287,18 +286,18 @@ function showResults() {
     let postH = 0.2 * height;
     let postLeftX = midX - 6*col;
     let postRightX = midX + 6*col;
-    let postY = 0.42 * height;
+    let postY = 0.38 * height;
     let postCorner = 6;
 
-    let dotY = 0.7 * height;
+    let dotY = 0.65 * height;
 
-    let buttonW = 0.3 * width;
+    let buttonW = 0.24 * width;
     let buttonH = 0.1 * height;
     let buttonX = midX;
-    let buttonY = height - 100;
+    let buttonY = height * 0.8;
 
     let scoreX = midX;
-    let scoreY = height * 0.95;
+    let scoreY = height * 0.92;
 
     textAlign(CENTER, CENTER);
     rectMode(CENTER);
@@ -331,15 +330,15 @@ function showResults() {
 
     // draw POST-CONTENT
     fill(colorLight);
-    textSize(30);
+    textSize(50);
     textStyle(BOLD);
-    text(actualPostLeft.ups, postLeftX, postY, postW, postH);
-    text(actualPostRight.ups, postRightX, postY, postW, postH);
-    image(upward, postLeftX-80, postH+110,60, 60);
-    image(upward, postRightX-80, postH+110,60, 60);
+    text(actualPostLeft.ups, postLeftX, postY - 10, postW, postH);
+    text(actualPostRight.ups, postRightX, postY - 10, postW, postH);
+    image(upward, postLeftX+100, postY,60, 60);
+    image(upward, postRightX+100, postY,60, 60);
 
     // draw DOTS
-    stroke(colorHigher);
+    // stroke(colorHigher);
     strokeWeight(1);
     for(let i = 0; i < numShowcasePosts; i++){
         // Dot size depending on upvote
@@ -414,10 +413,10 @@ function showResults() {
     // draw SCORE
     fill(colorHigher);
     textStyle(BOLD);
-    textSize(20);
+    textSize(30);
     textFont(BebasNeue);
-    text("Score: " + score, scoreX, scoreY);
-    image(scoreImg, scoreX-50, scoreY-3,35,35);
+    text("• Score: " + score + " •", scoreX, scoreY);
+    // image(scoreImg, scoreX-50, scoreY-3,35,35);
 
 
     // draw NEXT-BUTTON

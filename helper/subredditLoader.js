@@ -3,17 +3,18 @@
 // list of subreddit names
 let listOfSubredditNames = [
     "askReddit",
-    // "AMA",
-    // "askWomen",
-    // "askScience",
-    // "lotr",
+    "AMA",
+    "askWomen",
+    "askScience",
+    "lotr",
+    "askMen",
     // "biology",
     // "Awwducational",
     // "physics",
     // "chemistry",
     // "nasa",
     // "spacex",
-    // "space",
+    "space",
     // "jobs",
     // "workonline",
     // "coding",
@@ -25,9 +26,9 @@ let listOfSubredditNames = [
     // "running",
     // "woahdude",
     // "glitchinthematrix",
-    // "poetry",
+    "poetry",
     // "lovecraft",
-    // "memes"
+    "memes"
 ]
 
 // list of all subreddits

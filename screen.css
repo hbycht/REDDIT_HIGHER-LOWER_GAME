@@ -1,18 +1,39 @@
 body {
     /*background: linear-gradient(0.25turn, hsl(221, 96%, 21%), hsl(41, 92%, 76%), hsl(180, 63%, 31%));*/
-    background: linear-gradient(0.25turn, #d9a96b, #144c64, #913544);
+    background: linear-gradient(0.375turn, #71a9bd, #F27D74, #062373);
     color: #ffe7b3;
 }
 
-.p5Canvas {
+h2{
+    font-family: "assets/Fonts/Oswald-Medium.ttf", sans-serif;
+    color: #ffc4ab;
+}
+button {
+    background-color: #F27D74;
+    border: none;
+    color: white;
+    text-align: center;
+    font-family: "assets/Fonts/Oswald-Medium.ttf", sans-serif;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+
+}
+button:hover {
+    background-color: #35078c;
+}
+
+p {
+    font-family: "assets/Fonts/Oswald-Medium.ttf", sans-serif;
+    color: #ffc4ab;
+}
+
+main {
     
     width: max-content;
     height: max-content;
     
 
-    margin: 5% 5% 0% 5%;
-    padding: 0;
+    margin: 7% auto;
     position: relative;
-    top: 0%;
-    left: 0%;
 }
