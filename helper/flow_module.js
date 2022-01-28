@@ -6,7 +6,7 @@ let drawingParams = {
 
   reactToForces: true,
 
-  defaultAngle: 0,
+  defaultAngle: 270,
 
   forceSpacing: 40,
 
@@ -19,19 +19,19 @@ let drawingParams = {
 
   particleSpeed: 5,
 
-  attachToForces: 0.9,
+  attachToForces: 0.0,
 
-  particleSize: 0.2,
+  particleSize: 1.0,
 
-  numParticles: 1500,
+  numParticles: 1000,
 
-  particleColorBegin: 345,
+  particleColorBegin: 255,
   
   particleColorEnd: 345,
 
   background: 5,
 
-  backgroundAlpha: 5,
+  backgroundAlpha: 10,
 
   
 };
@@ -74,8 +74,9 @@ function initParticles() {
 
   colors = [
     colorHigher,
-    colorLower,
-    colorPosts
+    "#71a9bd",
+    // colorLower,
+    colorButton
   ];
 
   let randomScale = random(1 / 2, 2);
@@ -86,7 +87,7 @@ function initParticles() {
     var y = random(height);
 
     particles.push({
-      col: drawingParams.particleColorBegin,
+      col: random(colors),
       xPos: x,
       yPos: y,
       preX: x,
@@ -99,6 +100,9 @@ function initParticles() {
 }
 
 function drawParticle(p, forces) {
+
+  drawingParams.attachToForces = sin(frameCount * 5) / 2 + 0.5;
+
   push();
 
   // draw particle

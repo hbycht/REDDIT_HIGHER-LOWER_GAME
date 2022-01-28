@@ -16,16 +16,22 @@ speaker.onEnd = function(e) {
 let isSpeaking = false;
 
 function speakKeyword(keyword) {
-    if(speakingQueue.length < 6) {
-        speakingQueue.push(keyword);
-        isSpeaking = true;
-        speaker.speak(speakingQueue[speakingQueue.length - 1]); // say something
-        console.log(speakingQueue);
-    }
+    isSpeaking = true;
+    speaker.speak(keyword);
+    console.log(keyword);
     
+}
+
+function speakComments(comments) {
+    speakingQueue = shuffle(comments);
+    isSpeaking = true;
+    speaker.speak(speakingQueue[0]);
+    console.log(speakingQueue[0]);
+    speakingQueue.shift();
 }
 
 function stopSpeaking() {
     speaker.cancel();
     speakingQueue = [];
+    isSpeaking = false;
 }

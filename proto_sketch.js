@@ -14,18 +14,18 @@ function preload() {
     //* Load all subreddits in setup with loadSubreddit(subreddit)
 
     // ** Load all reddit .json (You can add even more; maybe it gets a bit overloaded) **//
-    loadSubreddit("memes");
+    loadSubreddit(random(listOfSubredditNames));
 
     // Fonts
     BebasNeue = loadFont('assets/Fonts/BebasNeue-Regular.ttf');
     OswaldMedium = loadFont('assets/Fonts/Oswald-Medium.ttf');
 
     // Images
-    sound= loadImage('assets/Images/sound.svg');
+    sound = loadImage('assets/Images/sound.svg');
+    muted = loadImage('assets/Images/Mute.png');
     compare = loadImage('assets/Images/outline_compare_arrows_white_48dp.png');
     scoreImg = loadImage('assets/Images/sports_score_white_48dp.svg');
     upward = loadImage('assets/Images/outline_arrow_upward_white_48dp.png');
-    muted = loadImage('assets/Images/Mute.png');
 
 }
 
@@ -39,7 +39,7 @@ function setup() {
     initSubmitGUI();
 
     // Create sketch canvas
-    createCanvas(windowWidth > 800 ? 800 : windowWidth * 0.9, windowHeight * 0.8);
+    createCanvas(windowWidth > 1200 ? 1200 : windowWidth * 0.9, windowHeight * 0.8);
 
     // Some general settings
     colorMode(HSB, 360, 100, 100, 100);
@@ -73,7 +73,7 @@ function draw() {
     // }
 
     // Clean sketch with fresh background
-    background(colorBackground);
+    background(colorBackgroundAlpha);
     drawFlowfield();
 
     drawGame();

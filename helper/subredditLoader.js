@@ -2,7 +2,7 @@
 
 // list of subreddit names
 let listOfSubredditNames = [
-    // "askReddit",
+    "askReddit",
     // "AMA",
     // "askWomen",
     // "askScience",
@@ -27,7 +27,7 @@ let listOfSubredditNames = [
     // "glitchinthematrix",
     // "poetry",
     // "lovecraft",
-    "memes"
+    // "memes"
 ]
 
 // list of all subreddits

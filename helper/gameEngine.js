@@ -39,6 +39,8 @@ let colorLeftHover;
 let colorRightHover;
 let colorButtonHover;
 
+let imgLeft;
+let imgRight;
 let picLeftLoaded = false;
 let picRightLoaded = false;
 
@@ -54,7 +56,8 @@ function setupGame(){
     col = width / 24; // Unterteilung der Sketchfläche in 12 Spaltenbreiten
 
     // set some color variables
-    colorBackground = color("#09161a");
+    colorBackgroundAlpha = color("rgba(9,22,26," + drawingParams.backgroundAlpha / 100 + ")");
+    colorBackground = color("rgb(9,22,26)");
     colorPosts = color("#061c50");
     colorLight = color("#ffffff");
     colorButton = color("#F27D74");
@@ -121,8 +124,8 @@ function showPosts() {
         else if (!actualPostRight.commentsLoaded) {
             loadComments(actualPostRight);
         } else if(!logSwitch) {
-            console.log(actualPostLeft.comments);
-            console.log(actualPostRight.comments);
+            // console.log(actualPostLeft.comments);
+            // console.log(actualPostRight.comments);
             logSwitch = true;
         }
     }
@@ -133,8 +136,10 @@ function showPosts() {
     let postH = 0.5 * height;
     let postLeftX = midX - 6.5*col;
     let postRightX = midX + 6.5*col;
-    let postY = 0.6 * height;
+    let postY = 0.55 * height;
     let postCorner = 6;
+
+    let soundIconDia = 2*col;
 
     let scoreX = midX;
     let scoreY = height * 0.95;
@@ -157,19 +162,9 @@ function showPosts() {
 
     // draw POSTS
     fill(hoverRect(postLeftX, postY, postW, postH) ? colorPostsHover : colorPosts);
-    rect(postLeftX, postY, hoverRect(postLeftX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
+    rect(postLeftX, postY, hoverRect(postLeftX, postY, postW, postH) ? postW * 1.04 : postW, hoverRect(postLeftX, postY, postW, postH) ? postH * 1.02 : postH, postCorner);
     fill(hoverRect(postRightX, postY, postW, postH) ? colorPostsHover : colorPosts);
-    rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, postH, postCorner);
-
-    // Icons
-    image(compare, midX, midY+20);
-
-    fill('#F27D74');
-    noStroke();
-    ellipse(postLeftX, postH+172, 70, 70);
-    ellipse(postRightX, postH+172, 70, 70);
-    image(sound, postLeftX+4, postH+172);
-    image(sound, postRightX+4, postH+172);
+    rect(postRightX, postY, hoverRect(postRightX, postY, postW, postH) ? postW * 1.04 : postW, hoverRect(postRightX, postY, postW, postH) ? postH * 1.02 : postH, postCorner);
 
 
     // draw POST-CONTENT
@@ -181,17 +176,63 @@ function showPosts() {
 
     // draw Pics
     if(actualPostLeft.post_hint == "image" && !picLeftLoaded){
-        let imgLeft = createImg(actualPostLeft.pic_url);
+        imgLeft = createImg(actualPostLeft.pic_url);
         imgLeft.position(postLeftX * 0.55, postY * 0.78);
         imgLeft.size(postW, postH);
         picLeftLoaded = true;
     }
     if(actualPostRight.post_hint == "image" && !picRightLoaded){
-        let imgRight = createImg(actualPostRight.pic_url);
+        imgRight = createImg(actualPostRight.pic_url);
         imgRight.position(postRightX * 0.87, postY * 0.78);
         imgRight.size(postW, postH);
         picRightLoaded = true;
     }
+
+    // ICONS
+    image(compare, midX, postY);
+
+    //** S P E E C H **//
+    fill(colorButton);
+    noStroke();
+
+    // left SOUND
+    if(actualPostLeft.commentsLoaded){
+        if(hoverCircle(postLeftX, postY + postH/2, soundIconDia)){
+            fill(colorButtonHover);
+            ellipse(postLeftX, postY + postH/2, soundIconDia + 10);
+            image(sound, postLeftX, postY + postH/2, soundIconDia * 0.8, soundIconDia * 0.8);
+            // SPEAK OUT A COMMENT
+            if(!isSpeaking){
+                speakComments(actualPostLeft.comments);
+                isSpeaking = true;
+            }
+        } else {
+            ellipse(postLeftX, postY + postH/2, soundIconDia);
+            image(muted, postLeftX, postY + postH/2, 50, 50);
+        }
+        fill(colorButton);
+    }
+
+    // right SOUND
+    if(actualPostRight.commentsLoaded){
+        if(hoverCircle(postRightX, postY + postH/2, soundIconDia)){
+            fill(colorButtonHover);
+            ellipse(postRightX, postY + postH/2, soundIconDia + 10);
+            image(sound, postRightX, postY + postH/2, soundIconDia * 0.8, soundIconDia * 0.8);
+            // SPEAK OUT A COMMENT
+            if(!isSpeaking){
+                speakComments(actualPostRight.comments);
+                isSpeaking = true;
+            }
+        } else {
+            ellipse(postRightX, postY + postH/2, soundIconDia);
+            image(muted, postRightX, postY + postH/2, 50, 50);
+        }
+    }
+
+    // stop Speech if mouse isn't on any button
+    if(!hoverCircle(postLeftX, postY + postH/2, soundIconDia) && !hoverCircle(postRightX, postY + postH/2, soundIconDia))
+        stopSpeaking();
 
     // draw SCORE
     fill(colorHigher);
@@ -212,6 +253,10 @@ function showPosts() {
             }
             timer = 1;
             //loadNextRound();
+            if(actualPostLeft.post_hint == "image"){
+                imgLeft.remove();
+                imgRight.remove();
+            }
         }
         // on RIGHT post
         else if(hoverRect(postRightX, postY, postW, postH)) {
@@ -222,6 +267,10 @@ function showPosts() {
             }
             timer = 1;
             //loadNextRound();
+            if(actualPostLeft.post_hint == "image"){
+                imgLeft.remove();
+                imgRight.remove();
+            }
         }
     }
 }
@@ -229,7 +278,7 @@ function showPosts() {
 // Game state: Answer
 function showResults() {
 
-    let numShowcasePosts = 7;
+    let numShowcasePosts = 5;
     let xSpacing = width / (numShowcasePosts + 1);
 
     let headerY = 0.1 * height;
@@ -290,6 +339,8 @@ function showResults() {
     image(upward, postRightX-80, postH+110,60, 60);
 
     // draw DOTS
+    stroke(colorHigher);
+    strokeWeight(1);
     for(let i = 0; i < numShowcasePosts; i++){
         // Dot size depending on upvote
         let diameter = map(actualSubreddit.posts[i].ups, dataMin, dataMax, 20, xSpacing / 2);
@@ -310,25 +361,25 @@ function showResults() {
 
             const y = dotY + sin(frameCount * 2 + i * 100) * 3;
 
-            // shade the background
-            // background(colorBackground);
+
+
             // connecting line from dot to post content
             stroke(colorButton);
             strokeWeight(5);
             noFill();
             beginShape();
-            curveVertex(x, y - diameter / 1.8);
-            curveVertex(x, y - diameter / 1.8);
-            curveVertex(x, dotY - diameter * 0.9);
+            curveVertex(x, y - diameter / 1.3);
+            curveVertex(x, y - diameter / 1.3);
+            curveVertex(x, y - diameter * 1.5);
             curveVertex(midX, postY + (dotY - postY) / 2);
             curveVertex(midX, postY);
             curveVertex(midX, postY);
             endShape();
             // dot contour
             fill(colorBackground);
-            ellipse(x, y, diameter * 1.3);
+            ellipse(x, y, diameter * 1.5);
             noStroke();
-            rect(x, y + diameter / 2.0, diameter * 1.6, diameter);
+            // rect(x, y + diameter / 2.0, diameter * 1.6, diameter);
             // draw the dot in hover color
             fill(colorHigher);
             ellipse(x, y, diameter * 1.1);
@@ -336,27 +387,29 @@ function showResults() {
             fill(colorHigher);
             stroke(colorButton);
             strokeWeight(5);
-            rect(midX, postY, 18 * col, postH * 0.7, postCorner * 2);
+            rect(midX, postY - postH * 0.1, 22 * col, postH * 1.2, postCorner * 3);
             // draw upvotes label
             fill(colorButton);
             textSize(28);
             textStyle(BOLD);
             let upText = actualSubreddit.posts[i].ups + " upvotes";
-            rect(midX, postY - postH * 0.35, textWidth(upText) + 40, 50, postCorner * 2);
+            rect(midX, postY - postH * 0.70, textWidth(upText) + 40, 50, postCorner * 2);
             noStroke();
 
             // show num upvotes
-            fill(colorBackground);
-            text(upText, midX, postY - postH * 0.35);
+            fill(colorLight);
+            text(upText, midX, postY - postH * 0.75);
             // show post content
             textSize(20);
             textStyle(BOLD)
-            text(actualSubreddit.posts[i].title, midX, postY, 16 * col, postH * 0.5);
+            fill(colorBackground);
+            text(actualSubreddit.posts[i].title, midX, postY - postH * 0.1, 16 * col, postH * 0.5);
 
         } else {
             hoverDot = false;
         }
     }
+    noStroke();
 
     // draw SCORE
     fill(colorHigher);
