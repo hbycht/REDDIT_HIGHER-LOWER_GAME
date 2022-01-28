@@ -182,13 +182,13 @@ function showPosts() {
     // draw Pics
     if(actualPostLeft.post_hint == "image" && !picLeftLoaded){
         let imgLeft = createImg(actualPostLeft.pic_url);
-        imgLeft.position(postLeftX, postY);
+        imgLeft.position(postLeftX * 0.55, postY * 0.78);
         imgLeft.size(postW, postH);
         picLeftLoaded = true;
     }
     if(actualPostRight.post_hint == "image" && !picRightLoaded){
         let imgRight = createImg(actualPostRight.pic_url);
-        imgRight.position(postRightX, postY);
+        imgRight.position(postRightX * 0.87, postY * 0.78);
         imgRight.size(postW, postH);
         picRightLoaded = true;
     }

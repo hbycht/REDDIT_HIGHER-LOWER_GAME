@@ -39,7 +39,7 @@ function setup() {
     initSubmitGUI();
 
     // Create sketch canvas
-    createCanvas(windowWidth * 0.9, windowHeight * 0.8);
+    createCanvas(windowWidth > 800 ? 800 : windowWidth * 0.9, windowHeight * 0.8);
 
     // Some general settings
     colorMode(HSB, 360, 100, 100, 100);
