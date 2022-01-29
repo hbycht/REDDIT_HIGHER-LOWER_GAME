@@ -47,6 +47,11 @@ let picRightLoaded = false;
 let timer = 0;
 let score = 0;
 
+let upsL;
+let upsR;
+let upsLStep;
+let upsRStep;
+
 let logSwitch = false;
 
 function setupGame(){
@@ -58,15 +63,16 @@ function setupGame(){
     // set some color variables
     colorBackgroundAlpha = color("rgba(9,22,26," + drawingParams.backgroundAlpha / 100 + ")");
     colorBackground = color("rgb(9,22,26)");
-    colorPosts = color("#061c50");
+    colorPosts = color("rgba(6,28,79,0.7)");
     colorLight = color("#ffffff");
     colorButton = color("#F27D74");
-    colorDotFrom = color("#71a9bd");
-    colorDotTo = color("#F24B3F");
+    colorDotFrom = color("#00b9ff");
+    colorDotTo = color("#ff1000");
 
-    colorHigher = color("#00eca6");
-    colorLower = color("#e82d5d");
-    colorPostsHover = color("#0e389b");
+    colorHigher = color("rgba(0,237,166,0.4)");
+    colorLower = color("rgba(232,44,91,0.4)");
+    colorHigherFull = color("rgb(0,237,166)");
+    colorPostsHover = color("rgba(14,56,156,0.9)");
     colorButtonHover = color("#d95148");
 
 
@@ -126,7 +132,7 @@ function showPosts() {
         } else if(!logSwitch) {
             // console.log(actualPostLeft.comments);
             // console.log(actualPostRight.comments);
-            logSwitch = true;
+            // logSwitch = true;
         }
     }
 
@@ -158,7 +164,7 @@ function showPosts() {
     text("r/" + actualSubreddit.name, midX, headerY + 50);
     textSize(20);
     fill(colorButtonHover);
-    text(actualSubreddit.numFollows + " Members", midX, headerY + 85);
+    text(simpleNumber(actualSubreddit.numFollows) + " Members", midX, headerY + 85);
 
     // draw POSTS
     fill(hoverRect(postLeftX, postY, postW, postH) ? colorPostsHover : colorPosts);
@@ -200,7 +206,7 @@ function showPosts() {
         if(hoverCircle(postLeftX, postY + postH/2, soundIconDia)){
             fill(colorButtonHover);
             ellipse(postLeftX, postY + postH/2, soundIconDia + 10);
-            image(sound, postLeftX, postY + postH/2, soundIconDia * 0.8, soundIconDia * 0.8);
+            image(sound, postLeftX, postY + postH/2, soundIconDia * 0.6, soundIconDia * 0.6);
             // SPEAK OUT A COMMENT
             if(!isSpeaking){
                 speakComments(actualPostLeft.comments);
@@ -218,7 +224,7 @@ function showPosts() {
         if(hoverCircle(postRightX, postY + postH/2, soundIconDia)){
             fill(colorButtonHover);
             ellipse(postRightX, postY + postH/2, soundIconDia + 10);
-            image(sound, postRightX, postY + postH/2, soundIconDia * 0.8, soundIconDia * 0.8);
+            image(sound, postRightX, postY + postH/2, soundIconDia * 0.6, soundIconDia * 0.6);
             // SPEAK OUT A COMMENT
             if(!isSpeaking){
                 speakComments(actualPostRight.comments);
@@ -235,7 +241,7 @@ function showPosts() {
         stopSpeaking();
 
     // draw SCORE
-    fill(colorHigher);
+    fill(colorHigherFull);
     textStyle(BOLD);
     textSize(30);
     textFont(BebasNeue);
@@ -264,6 +270,10 @@ function showPosts() {
             timer = 1;
         }
     }
+    logSwitch = false;
+
+    upsL = 0;
+    upsR = 0;
 }
 
 // Game state: Answer
@@ -273,8 +283,20 @@ function showResults() {
     if(actualPostLeft.post_hint == "image"){
         imgLeft.remove();
     }
-    if(actualPostLeft.post_hint == "image"){
+    if(actualPostRight.post_hint == "image"){
         imgRight.remove();
+    }
+
+    // animation to rise upvote count over time
+    upsLStep = actualPostLeft.ups / (frameRate() * 1); // the last number is for seconds of animation time
+    upsRStep = actualPostRight.ups / (frameRate() * 1); // the last number is for seconds of animation time
+    upsL =  upsL < actualPostLeft.ups ? upsL + upsLStep : actualPostLeft.ups;
+    upsR =  upsR < actualPostRight.ups ? upsR + upsRStep : actualPostRight.ups;
+
+    if(!logSwitch){
+        console.log("Step: " + upsLStep);
+        console.log("ganze Zahl: " + actualPostLeft.ups);
+        logSwitch = true;
     }
 
     let numShowcasePosts = 5;
@@ -317,7 +339,7 @@ function showResults() {
     text("r/" + actualSubreddit.name, midX, headerY);
     textSize(22);
     fill(colorButtonHover);
-    text(actualSubreddit.numFollows + " Follower", midX, headerY + 40);
+    text(simpleNumber(actualSubreddit.numFollows) + " Follower", midX, headerY + 40);
 
 
 
@@ -332,13 +354,13 @@ function showResults() {
     fill(colorLight);
     textSize(50);
     textStyle(BOLD);
-    text(actualPostLeft.ups, postLeftX, postY - 10, postW, postH);
-    text(actualPostRight.ups, postRightX, postY - 10, postW, postH);
+    text(simpleNumber(upsL), postLeftX, postY - 10, postW, postH);
+    text(simpleNumber(upsR), postRightX, postY - 10, postW, postH);
     image(upward, postLeftX+100, postY,60, 60);
     image(upward, postRightX+100, postY,60, 60);
 
     // draw DOTS
-    // stroke(colorHigher);
+    // stroke(colorHigherFull);
     strokeWeight(1);
     for(let i = 0; i < numShowcasePosts; i++){
         // Dot size depending on upvote
@@ -380,10 +402,10 @@ function showResults() {
             noStroke();
             // rect(x, y + diameter / 2.0, diameter * 1.6, diameter);
             // draw the dot in hover color
-            fill(colorHigher);
+            fill(colorHigherFull);
             ellipse(x, y, diameter * 1.1);
             // draw post content field
-            fill(colorHigher);
+            fill(colorHigherFull);
             stroke(colorButton);
             strokeWeight(5);
             rect(midX, postY - postH * 0.1, 22 * col, postH * 1.2, postCorner * 3);
@@ -391,7 +413,7 @@ function showResults() {
             fill(colorButton);
             textSize(28);
             textStyle(BOLD);
-            let upText = actualSubreddit.posts[i].ups + " upvotes";
+            let upText = simpleNumber(actualSubreddit.posts[i].ups) + " upvotes";
             rect(midX, postY - postH * 0.70, textWidth(upText) + 40, 50, postCorner * 2);
             noStroke();
 
@@ -411,7 +433,7 @@ function showResults() {
     noStroke();
 
     // draw SCORE
-    fill(colorHigher);
+    fill(colorHigherFull);
     textStyle(BOLD);
     textSize(30);
     textFont(BebasNeue);
@@ -446,4 +468,16 @@ function manageGameState(){
     }else if(timer === 1){
         showResults();
     }
+}
+
+function simpleNumber(number) {
+    let inM = number / 1000000;
+    let inK = number / 1000;
+    if(inM > 1)
+        return round(inM, 1) + "M";
+    else if(inK > 1)
+        return round(inK, 1) + "K";
+    else
+        return round(number, 0);
+
 }

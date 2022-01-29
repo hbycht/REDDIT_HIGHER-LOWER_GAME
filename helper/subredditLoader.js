@@ -6,15 +6,15 @@ let listOfSubredditNames = [
     "AMA",
     "askWomen",
     "askScience",
-    "lotr",
+    // "lotr",
     "askMen",
-    // "biology",
+    "biology",
     // "Awwducational",
     // "physics",
     // "chemistry",
     // "nasa",
     // "spacex",
-    "space",
+    // "space",
     // "jobs",
     // "workonline",
     // "coding",
@@ -26,9 +26,9 @@ let listOfSubredditNames = [
     // "running",
     // "woahdude",
     // "glitchinthematrix",
-    "poetry",
+    // "poetry",
     // "lovecraft",
-    "memes"
+    // "memes"
 ]
 
 // list of all subreddits

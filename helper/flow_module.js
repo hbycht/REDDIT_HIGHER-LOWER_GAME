@@ -101,7 +101,7 @@ function initParticles() {
 
 function drawParticle(p, forces) {
 
-  drawingParams.attachToForces = sin(frameCount * 5) / 2 + 0.5;
+  drawingParams.attachToForces = sin(frameCount * 1) / 2 + 0.5;
 
   push();
 
