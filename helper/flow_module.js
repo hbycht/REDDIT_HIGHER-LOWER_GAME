@@ -73,10 +73,10 @@ function drawForce(xPos, yPos, dir, pow) {
 function initParticles() {
 
   colors = [
-    colorHigher,
-    "#71a9bd",
-    // colorLower,
-    colorButton
+    // "#08cebd",
+    "#ee8460",
+    "#7d83e5",
+    "#0724e3",
   ];
 
   let randomScale = random(1 / 2, 2);
